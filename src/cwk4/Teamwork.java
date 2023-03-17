@@ -16,9 +16,9 @@ public class Teamwork {
         // before the surname of member 2...etc
         details[0] = "team number";
 
-        details[1] = "surname of member1";
-        details[2] = "first name of member1";
-        details[3] = "SRN of member1";
+        details[1] = "Alliu";
+        details[2] = "Klevi";
+        details[3] = "20067052";
 
         details[4] = "surname of member2";
         details[5] = "first name of member2";
