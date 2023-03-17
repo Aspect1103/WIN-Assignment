@@ -7,18 +7,18 @@ package cwk4;
  * @version (a version number or a date)
  */
 public class Teamwork {
-    private String[] details = new String[12];
+    private String[] details = new String[13];
 
     public Teamwork() {   // in each line replace the contents of the String
         // with the details of your team member
         // Please list the member details alphabetically by surname 
         // i.e. the surname of member1 should come alphabetically 
         // before the surname of member 2...etc
-        details[0] = "team number";
+        details[0] = "12";
 
-        details[1] = "surname of member1";
-        details[2] = "first name of member1";
-        details[3] = "SRN of member1";
+        details[1] = "Ashwell";
+        details[2] = "Jack";
+        details[3] = "20035866";
 
         details[4] = "surname of member2";
         details[5] = "first name of member2";
@@ -31,7 +31,6 @@ public class Teamwork {
         details[10] = "surname of member4";
         details[11] = "first name of member4";
         details[12] = "SRN of member4";
-
     }
 
     public String[] getTeamDetails() {
