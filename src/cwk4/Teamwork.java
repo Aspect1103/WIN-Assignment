@@ -20,9 +20,9 @@ public class Teamwork {
         details[2] = "Jack";
         details[3] = "20035866";
 
-        details[4] = "surname of member2";
-        details[5] = "first name of member2";
-        details[6] = "SRN of member2";
+        details[4] = "Klevi";
+        details[5] = "Alliu";
+        details[6] = "20067052";
 
         details[7] = "surname of member3";
         details[8] = "first name of member3";
