@@ -19,8 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "8"
-          distribution: "temurin"
-      - name: Compile the tests
-        run: |
-          curl "https://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar" --output "${{ github.workspace }}/junit.jar"
-          javac -cp junit.jar src/cwk4/* test/Cwk4tests/*
+          distribution: "oracle"
+          cache: maven
+      - name: Build and test with Maven
+        run: mvn --batch-mode --update-snapshots package
