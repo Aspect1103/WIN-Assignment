@@ -1,33 +1,34 @@
 package cwk4;
 
 /**
- * Details of your team
+ * This class holds the details of our team made up of first and last names and student ID numbers.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Klevi, Jack, Luke, Abdulla
+ * @version 21/03/2023
  */
 public class Teamwork {
-    private String[] details = new String[13];
+    private final String[] details = new String[13];
 
-    public Teamwork() {   // in each line replace the contents of the String
-        // with the details of your team member
-        // Please list the member details alphabetically by surname 
-        // i.e. the surname of member1 should come alphabetically 
-        // before the surname of member 2...etc
+    public Teamwork() {
+        // Team name
         details[0] = "12";
 
+        // First team member's details
         details[1] = "Ashwell";
         details[2] = "Jack";
         details[3] = "20035866";
 
+        // Second team member's details
         details[4] = "Klevi";
         details[5] = "Alliu";
         details[6] = "20067052";
 
+        // Third team member's details
         details[7] = "Lovegrove";
         details[8] = "Luke";
         details[9] = "21000135";
 
+        // Fourth team member's details
         details[10] = "surname of member4";
         details[11] = "first name of member4";
         details[12] = "SRN of member4";
@@ -39,7 +40,7 @@ public class Teamwork {
 
     public void displayDetails() {
         for (String temp : details) {
-            System.out.println(temp.toString());
+            System.out.println(temp);
         }
     }
 }
