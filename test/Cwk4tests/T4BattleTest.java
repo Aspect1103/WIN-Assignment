@@ -1,212 +1,146 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cwk4tests;
 
 import cwk4.SpaceWars;
-import org.junit.After;
-import org.junit.AfterClass;
+import cwk4.WIN;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import cwk4.WIN;
-
-/**
- * @author aam
- */
 public class T4BattleTest {
     WIN game;
-
-    public T4BattleTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     @Before
     public void setUp() {
         game = new SpaceWars("Jean");
     }
 
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
     public void wingFacingSkirmishWins() {
-        int expected = 900;
         game.activateForce("IW1");
         game.doBattle(6);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(900, game.getWarchest());
     }
 
     @Test
     public void wingFacingSkirmishLoseOnStrength() {
-        int expected = 600;
         game.activateForce("IW1");
         game.doBattle(2);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(600, game.getWarchest());
     }
 
     @Test
     public void wingFacingAmbushWins() {
-        int expected = 950;
         game.activateForce("IW1");
         game.doBattle(3);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(950, game.getWarchest());
     }
 
     @Test
     public void wingFacingAmbushLoseOnSkill() {
-        int expected = 400;
         game.activateForce("IW1");
         game.doBattle(5);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(400, game.getWarchest());
     }
 
     @Test
     public void wingFacingBattleNotAllowed() {
-        int expected = 500;
         game.activateForce("IW1");
         game.doBattle(1);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(500, game.getWarchest());
     }
 
     @Test
     public void starshipFacingSkirmishWins() {
-        int expected = 650;
         game.activateForce("SS6");
         game.doBattle(6);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(650, game.getWarchest());
     }
 
     @Test
     public void starshipFacingSkirmishLoseOnStrength() {
-        int expected = 500;
         game.activateForce("SS2");
         game.doBattle(2);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(500, game.getWarchest());
     }
 
     @Test
     public void starshipFacingAmbushNotAllowed() {
-        int expected = 300;
         game.activateForce("SS2");
         game.doBattle(3);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(300, game.getWarchest());
     }
 
     @Test
     public void starshipFacingBattleWins() {
-        int expected = 650;
         game.activateForce("SS6");
         game.doBattle(1);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(650, game.getWarchest());
     }
 
     @Test
     public void starshipFacingBattleLoseOnStrength() {
-        int expected = 580;
         game.activateForce("SS7");
         game.doBattle(1);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(580, game.getWarchest());
     }
 
     @Test
     public void warbirdFacingSkirmishNotAllowed() {
-        int expected = 600;
         game.activateForce("WB9");
         game.doBattle(6);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(600, game.getWarchest());
     }
 
     @Test
     public void warbirdNoCloakingFacingAmbushNotAllowed() {
-        int expected = 300;
         game.activateForce("WB9");
         game.doBattle(3);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(300, game.getWarchest());
     }
 
     @Test
     public void warbirdWithCloakingFacingAmbushWins() {
-        int expected = 750;
         game.activateForce("WB5");
         game.doBattle(3);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(750, game.getWarchest());
     }
 
     @Test
     public void warbirdWithCloakingFacingAmbushLoseOnStrength() {
-        int expected = 200;
         game.activateForce("WB5");
         game.doBattle(5);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(200, game.getWarchest());
     }
 
     @Test
     public void warbirdFacingBattleWinsOnStrength() {
-        int expected = 700;
         game.activateForce("WB5");
         game.doBattle(1);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(700, game.getWarchest());
     }
 
     @Test
     public void warbirdFacingBattleLoseOnStrength() {
-        int expected = 100;
         game.activateForce("WB3");
         game.doBattle(4);
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(100, game.getWarchest());
     }
 
     @Test
     public void recallingDestroyedForceInFightDoesntAffectWarchest() {
-        int expected = 600;
         game.activateForce("IW1");
         game.doBattle(2);
         game.recallForce("IW1");
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(600, game.getWarchest());
     }
 
     @Test
     public void recallingDestroyedInFightForceDoesntAffectWarchestOnReactivation() {
-        int expected = 600;
         game.activateForce("IW1");
         game.doBattle(2);
         game.activateForce("IW1");
-        int actual = game.getWarchest();
-        assertEquals(expected, actual);
+        assertEquals(600, game.getWarchest());
     }
 
     @Test

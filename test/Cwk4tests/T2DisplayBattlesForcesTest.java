@@ -1,156 +1,97 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cwk4tests;
 
 import cwk4.SpaceWars;
-import org.junit.After;
-import org.junit.AfterClass;
+import cwk4.WIN;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import cwk4.WIN;
-
-/**
- * @author aam
- */
 public class T2DisplayBattlesForcesTest {
     WIN swim;
-
-    public T2DisplayBattlesForcesTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     @Before
     public void setUp() {
         swim = new SpaceWars("Bob");
     }
 
-    @After
-    public void tearDown() {
-    }
-
     private boolean containsText2(String text, String s1, String s2, String s3) {
-        boolean result = false;
-        result = text.contains(s1) && text.contains(s2) && text.contains(s3);
-        return result;
+        return text.contains(s1) && text.contains(s2) && text.contains(s3);
     }
 
     @Test
     public void battleNo1Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "1", "Fight", "Borg");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "1", "Fight", "Borg"));
     }
 
     @Test
     public void battleNo2Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "2", "Skirmish", "Kardassians");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "2", "Skirmish", "Kardassians"));
     }
 
     @Test
     public void battleNo3Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "3", "Ambush", "Ferengi");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "3", "Ambush", "Ferengi"));
     }
 
     @Test
     public void battleNo4Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "4", "Fight", "Ewoks");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "4", "Fight", "Ewoks"));
     }
 
     @Test
     public void battleNo5Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "5", "Ambush", "Borg");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "5", "Ambush", "Borg"));
     }
 
     @Test
     public void battleNo6Displayed() {
-        String result = swim.getAllBattles();
-        boolean actual = containsText2(result, "6", "Skirmish", "Groaners");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getAllBattles(), "6", "Skirmish", "Groaners"));
     }
 
     @Test
     public void forceFleetIW1Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "IW1", "Twisters", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "IW1", "Twisters", ""));
     }
 
     @Test
     public void forceFleetSS2Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "SS2", "Enterprise", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "SS2", "Enterprise", ""));
     }
 
 
     @Test
     public void forceFleetWB3Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "WB3", "Droop", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "WB3", "Droop", ""));
     }
 
     @Test
     public void forceFleetIW4Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "IW4", "Wingers", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "IW4", "Wingers", ""));
     }
 
     @Test
     public void forceFleetWB5Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "WB5", "Hang", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "WB5", "Hang", ""));
     }
 
     @Test
     public void forceFleetSS6Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "SS6", "Voyager", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "SS6", "Voyager", ""));
     }
 
     @Test
     public void forceFleetSS7Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "SS7", "Explorer", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "SS7", "Explorer", ""));
     }
 
     @Test
     public void forceFleetWB9Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "WB9", "Hover", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "WB9", "Hover", ""));
     }
 
     @Test
     public void forceFleetIW10Displayed() {
-        String result = swim.getForcesInDock();
-        boolean actual = containsText2(result, "IW10", "Flyers", "");
-        assertTrue(actual);
+        assertTrue(containsText2(swim.getForcesInDock(), "IW10", "Flyers", ""));
     }
 }
