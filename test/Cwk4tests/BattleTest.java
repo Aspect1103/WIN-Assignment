@@ -5,12 +5,12 @@ import cwk4.WIN;
 import org.junit.Before;
 
 /**
- * Holds tests related to the initialisation of the game.
+ * Holds tests related to the doing battles.
  *
  * @author Klevi, Jack, Luke, Abdulla
  * @version 21/03/2023
  */
-public class SetupTester {
+public class BattleTest {
     // Define the WIN interface variable to use for testing
     WIN game;
 

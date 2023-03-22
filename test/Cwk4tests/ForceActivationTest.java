@@ -5,12 +5,12 @@ import cwk4.WIN;
 import org.junit.Before;
 
 /**
- * Holds tests related to saving/loading/reading.
+ * Holds tests related to the force activation.
  *
  * @author Klevi, Jack, Luke, Abdulla
  * @version 21/03/2023
  */
-public class SaveLoadTester {
+public class ForceActivationTest {
     // Define the WIN interface variable to use for testing
     WIN game;
 
