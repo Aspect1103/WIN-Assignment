@@ -1,7 +1,8 @@
 package cwk4;
 
 /**
- * A class representing a cwk4.Force, a unit in the United Forces Fleet (UFF) which can partake in battles.
+ * Represents a force in the United Forces Fleet (UFF) which can partake
+ * in battles.
  *
  * @author Klevi, Jack, Luke, Abdulla
  * @version 23/03/2023
@@ -13,54 +14,64 @@ public class Force {
     private final int strength;
 
     /**
-     * Constructor - Constructs a Force object
+     * Constructs a force object.
      *
-     * @param ref      - Reference
-     * @param name     - Name
-     * @param fee      - Fee
-     * @param strength - Strength
+     * @param ref     The force's reference.
+     * @param nme     The force's name.
+     * @param cost    The force's activation fee.
+     * @param strngth The force's strength.
      */
-    public Force(String ref, String name, int fee, int strength) {
+    public Force(String ref, String nme, int cost, int strngth) {
         reference = ref;
-        this.name = name;
-        this.fee = fee;
-        this.strength = strength;
+        name = nme;
+        fee = cost;
+        strength = strngth;
     }
 
     /**
-     * A String returning the Reference
+     * Get the force's reference.
+     *
+     * @return The force's reference.
      */
     public String getReference() {
         return reference;
     }
 
     /**
-     * A String returning the Name
+     * Get the force's name.
+     *
+     * @return The force's name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * A String returning the Fee
+     * Get the force's activation fee.
+     *
+     * @return The force's activation fee.
      */
     public int getFee() {
         return fee;
     }
 
     /**
-     * A String returning the Strength
+     * Get the force's strength
+     *
+     * @return The force's strength.
      */
     public int getStrength() {
         return strength;
     }
 
     /**
-     * A method to return the details of a cwk4.Force in a String
+     * Get a human-readable representation of this object including the
+     * force reference, the force name, the activation cost, and the force
+     * strength.
      *
-     * @return the Reference, the Name, the Fee and the Strength
+     * @return A string representation of this object.
      */
     public String toString() {
-        return "<cwk4.Force Reference: " + reference + " - Name: " + name + " - Fee: " + fee + " - Strength: " + strength + ">";
+        return "<Force Reference: " + reference + " - Name: " + name + " - Activation Fee: " + fee + " - Strength: " + strength + ">";
     }
 }
