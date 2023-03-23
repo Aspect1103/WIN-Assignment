@@ -25,12 +25,12 @@ public class GameUI {
                 System.out.println(gp.getAllForces());
             } else if (choice == 2) { // List all battles
                 System.out.println(gp.getAllBattles());
-            } else if (choice == 3) {  // get Force
-                System.out.println("Enter Force reference");
+            } else if (choice == 3) {  // get cwk4.Force
+                System.out.println("Enter cwk4.Force reference");
                 myIn.nextLine();
                 String ref = (myIn.nextLine()).trim();
                 System.out.println(gp.getForceDetails(ref));
-            } else if (choice == 4) {  // activate Force
+            } else if (choice == 4) {  // activate cwk4.Force
 
             } else if (choice == 5) { //  List ASFleet
 
