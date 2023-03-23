@@ -61,6 +61,6 @@ public class Force {
      * @return the Reference, the Name, the Fee and the Strength
      */
     public String toString() {
-        return "<cwk4.Force Reference: " + reference + " - Name: " + name + " - Fee: " + fee + " - Strength: " + strength + ">"
+        return "<cwk4.Force Reference: " + reference + " - Name: " + name + " - Fee: " + fee + " - Strength: " + strength + ">";
     }
 }
