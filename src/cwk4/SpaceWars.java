@@ -1,219 +1,211 @@
 package cwk4;
 
+import java.util.HashMap;
+
 /**
  * This class implements the behaviour expected from a WIN
- * system as required for 5COM2007 - March 2023
+ * system as required for 5COM2007.
  *
- * @author Team ??
- * @version March 2023
+ * @author Klevi, Jack, Luke, Abdulla
+ * @version 23/03/2023
  */
 public class SpaceWars implements WIN {
-//**************** WIN **************************
+    private final int warChest = 1000;
+    private final HashMap<String, Force> forces = new HashMap<String, Force>();
+
     /**
-     * Constructor requires the name of the admiral
+     * Constructs a SpaceWars object.
      *
-     * @param admiral the name of the admiral
+     * @param admiral The name of the admiral.
      */
     public SpaceWars(String admiral) {
         setupForces();
         setupBattles();
     }
 
-    /** Second constructor - task 3.5
-     *  To be added for task 3.5
+    /**
+     * Constructs a SpaceWars object reading battles from a file.
+     *
+     * @param admiral  The name of the admiral.
+     * @param filename The filename of the battles file.
      */
+    public SpaceWars(String admiral, String filename) {
+    }
 
     /**
-     * Returns a String representation of the state of the game,
-     * including the name of the admiral, state of the war chest,
-     * whether defeated or not, and the forces currently in the
-     * Active Star Fleet(ASF),(or, "No forces" if Star Fleet is empty)
+     * Get a human-readable representation of the state of the
+     * game including the name of the admiral, the state of the
+     * war chest, whether defeated or not, and the forces currently
+     * in the ASF.
      *
-     * @return a String representation of the state of the game,
-     * including the name of the admiral, state of the war chest,
-     * whether defeated or not, and the forces currently in the
-     * Star Fleet,(or, "No forces" if Active Star Fleet is empty)
+     * @return A string representation of the state of the game.
      **/
     public String toString() {
-
         return "";
     }
 
     /**
-     * returns true if war chest <=0 AND the active Star Fleet(ASF) has no
-     * forces which can be recalled.
+     * Determines if the admiral is defeated or not. It returns
+     * true if the war chest <= 0 and the ASF has no forces which
+     * can be recalled.
      *
-     * @returns true if war chest <=0 and the active Star Fleet(ASF) has no
-     * forces which can be recalled.
+     * @return Whether the admiral is defeated or not.
      */
     public boolean isDefeated() {
         return false;
     }
 
     /**
-     * returns the number of bit coins in the war chest
+     * Get the number of bit coins in the war chest.
      *
-     * @returns the number of bit coins in the war chest
+     * @return The number of bit coins in the war chest.
      */
     public int getWarchest() {
-        return 0;
+        return warChest;
     }
 
-    /* Returns a list of all forces in the system by listing :
-     * All forces in the Active Star Fleet(ASF), or "No forces in ASF")
-     * All forces remaining in the UFF dock, or "No forces in UFF dock
-     * All forces destroyed as a result of losing a battle, or "No destroyed forces"
+    /**
+     * Get a list of all forces in the system listing all forces
+     * in the ASF, the UFF dock, and destroyed forces.
+     *
+     * @return A list of all forces in the system.
      */
     public String getAllForces() {
-
         return "";
     }
 
     /**
-     * Returns true if force is in the United Forces Fleet(UFF), else false
+     * Determines if a force reference is in the UFF dock.
      *
-     * @param ref reference of the force
-     * @return a String representation of all forces in the United Forces Fleet(UFF)
+     * @param ref The reference of the force.
+     * @return Whether the force is in the UFF dock or not.
      **/
     public boolean isInUFFDock(String ref) {
         return false;
     }
 
     /**
-     * Returns a String representation of all forces in the United Forces Fleet(UFF) dock.
-     * Does not include destroyed forces
+     * Get a list of all forces in the UFF dock.
      *
-     * @return a String representation of all forces in the United Forces Fleet(UFF) dock.
+     * @return A list of all forces in the UFF dock.
      **/
     public String getForcesInDock() {
-        String s = "\n\n************ Forces available in UFFleet Dock********\n";
-        return s;
+        return "\n\n************ Forces available in UFFleet Dock********\n";
     }
 
     /**
-     * Returns a list of all destroyed forces in the system
+     * Get a list of all destroyed forces in the system.
      *
-     * @return all destroyed forces
+     * @return A list of all destroyed forces in the system.
      */
     public String getDestroyedForces() {
-        String s = "\n***** Destroyed Forces ****\n";
-        return s;
+        return "\n***** Destroyed Forces ****\n";
     }
 
     /**
-     * Returns details of the force with the given reference code, or "No such force"
+     * Get a force's details from a given force reference or "No
+     * such force" if one doesn't exist.
      *
-     * @param ref the reference of the force
-     * @return details of the force with the given reference code
+     * @param ref The reference of the force.
+     * @return The force's details from a given force reference.
      **/
     public String getForceDetails(String ref) {
         return "\nNo such force";
     }
 
-    // ***************** Active Star Fleet Forces ************************
-
     /**
-     * Allows a force to be activated into the Active Star Fleet(ASF), but
-     * only if there are enough resources for the activation fee.The force's
-     * state is set to "active"
+     * Activates a force into the ASF only if there are enough
+     * resources for the activation fee. The force's state is
+     * then set to "active".
      *
-     * @param ref represents the reference code of the force
-     * @return 0 if force is activated, 1 if force is not in the UFF dock or is destroyed
-     * 2 if not enough money, -1 if no such force
+     * @param ref The reference of the force.
+     * @return 0 if the force is activated, 1 if the force is not
+     * in the UFF dock or is destroyed, 2 if there is not enough
+     * bit coins, or -1 if the force doesn't exist.
      **/
     public int activateForce(String ref) {
         return -1;
     }
 
     /**
-     * Returns true if the force with the reference code is in
-     * the Active Star Fleet(ASF), false otherwise.
+     * Determines if a given force reference exists in the ASF.
      *
-     * @param ref is the reference code of the force
-     * @return returns true if the force with the reference code
-     * is in the active Star Fleet(ASF), false otherwise.
+     * @param ref The reference of the force.
+     * @return Whether the given force reference exists in the ASF.
      **/
     public boolean isInASFleet(String ref) {
         return false;
     }
 
     /**
-     * Returns a String representation of the forces in the active
-     * Star Fleet(ASF), or the message "No forces activated"
+     * Get a list of all forces in the ASF.
      *
-     * @return a String representation of the forces in the active
-     * Star Fleet, or the message "No forces activated"
+     * @return A list of all forces in the ASF.
      **/
     public String getASFleet() {
-        String s = "\n****** Forces in the Active Star Fleet******\n";
-        return s;
+        return "\n****** Forces in the Active Star Fleet******\n";
     }
 
     /**
-     * Recalls a force from the Star Fleet(ASF) back to the UFF dock, but only
-     * if it is in the Active Star Fleet(ASF)
+     * Recalls a force from the ASF back to the UFF dock.
      *
-     * @param ref is the reference code of the force
+     * @param ref The reference of the force.
      **/
     public void recallForce(String ref) {
 
     }
 
-//**********************Battles************************* 
-
     /**
-     * returns true if the number represents a battle
+     * Determines if a given number represents a battle.
      *
-     * @param num is the number of the required battle
-     * @returns true if the number represents a battle
+     * @param num The number of the battle.
+     * @return Whether the given number represents a battle or not.
      **/
     public boolean isBattle(int num) {
         return false;
     }
 
     /**
-     * Provides a String representation of a battle given by
-     * the battle number
+     * Get a battle's details from a given battle number or
+     * "No such battle" is one doesn't exist.
      *
-     * @param num the number of the battle
-     * @return returns a String representation of a battle given by
-     * the battle number
+     * @param num The number of the battle.
+     * @return The battle's details from a given battle number.
      **/
     public String getBattle(int num) {
         return "No such battle";
     }
 
     /**
-     * Provides a String representation of all battles
+     * Get a list of all battles in the system.
      *
-     * @return returns a String representation of all battles
+     * @return A list of all battles in the system.
      **/
     public String getAllBattles() {
-        String s = "\n************ All Battles ************\n";
-        return s;
+        return "\n************ All Battles ************\n";
     }
 
     /**
-     * Retrieves the battle represented by the battle number.Finds
-     * a force from the Active Star Fleet which can engage in the battle.The
-     * results of battle will be one of the following:
-     * 0 - Battle won, battle gains added to the war chest,
-     * 1 - Battle lost as no suitable force available, battle losses
-     * deducted from war chest
-     * 2 - Battle lost on battle strength , battle losses
-     * deducted from war chest and force destroyed
-     * 3 - If a battle is lost and admiral completely defeated (no resources and
-     * no forces to recall)
-     * -1 - no such battle
+     * Simulates a battle by locating a force from the ASF
+     * which can engage in the battle. The result of the
+     * battle will be one of the following:
+     * 0 - Battle won so the gains are added to the
+     * war chest.
+     * 1 - Battle lost as no suitable force is available
+     * so losses are deducted from the war chest.
+     * 2 - Battle lost on battle strength so losses are
+     * deducted from the war chest and the force is destroyed.
+     * 3 - Battle lost and the admiral is completely defeated
+     * (war chest is empty and no forces to recall).
+     * -1 - No such battle is found.
      *
-     * @param battleNo is the number of the battle
-     * @return an int showing the result of the battle (see above)
+     * @param battleNo The number of the battle.
+     * @return An integer showing the result of the battle.
      */
     public int doBattle(int battleNo) {
         return 999;
     }
 
-    //*******************************************************************************
     private void setupForces() {
 
     }
@@ -222,35 +214,32 @@ public class SpaceWars implements WIN {
 
     }
 
-    //**************************Add your own private methods here ***********************
+    /**
+     * Writes the game state to a specified file.
+     *
+     * @param fname The name of the file to store the game state.
+     */
+    public void saveGame(String fname) {
 
+    }
 
-    //*******************************************************************************
-    //These methods are not needed until Task 3.5. Uncomment them to complete task 3.5
-    // ***************   file write/read  *********************
-//     /** Writes whole game to the specified file
-//      * @param fname name of file storing requests
-//      */
-//     public void saveGame(String fname)
-//     {   // uses object serialisation 
-//         
-//     }
-//     
-//     /** reads all information about the game from the specified file 
-//      * and returns a SpaceWars object
-//      * @param fname name of file storing the game
-//      * @return the game (as a SpaceWars object)
-//      */
-//     public SpaceWars restoreGame(String fname)
-//     {    
-//         
-//     }
-// 
-//     /** Reads information about battles from the specified file into the appropriate collection
-//      * @param the name of the file
-//      */
-//     private void readBattles(String fname)
-//     { 
-//         
-//     }
+    /**
+     * Initialise a SpaceWars object from a given filename
+     * storing the game state.
+     *
+     * @param fname The name of the file storing the game state.
+     * @return The initialised SpaceWars object.
+     */
+    public SpaceWars restoreGame(String fname) {
+
+    }
+
+    /**
+     * Loads the battles from a given filename.
+     *
+     * @param fname The name of the file storing the battles.
+     */
+    private void readBattles(String fname) {
+
+    }
 }
