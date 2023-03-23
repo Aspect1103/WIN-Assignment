@@ -10,8 +10,10 @@ import java.util.HashMap;
  * @version 23/03/2023
  */
 public class SpaceWars implements WIN {
+    private final String name;
     private final int warChest = 1000;
     private final HashMap<String, Force> forces = new HashMap<String, Force>();
+    private final HashMap<Integer, Battle> battles = new HashMap<Integer, Battle>();
 
     /**
      * Constructs a SpaceWars object.
@@ -19,6 +21,7 @@ public class SpaceWars implements WIN {
      * @param admiral The name of the admiral.
      */
     public SpaceWars(String admiral) {
+        name = admiral;
         setupForces();
         setupBattles();
     }
@@ -30,6 +33,7 @@ public class SpaceWars implements WIN {
      * @param filename The filename of the battles file.
      */
     public SpaceWars(String admiral, String filename) {
+        name = admiral;
     }
 
     /**
@@ -206,14 +210,6 @@ public class SpaceWars implements WIN {
         return 999;
     }
 
-    private void setupForces() {
-
-    }
-
-    private void setupBattles() {
-
-    }
-
     /**
      * Writes the game state to a specified file.
      *
@@ -232,6 +228,35 @@ public class SpaceWars implements WIN {
      */
     public SpaceWars restoreGame(String fname) {
 
+    }
+
+    /**
+     * Initialises the forces into the system.
+     */
+    private void setupForces() {
+        forces.put("IW1", new Wing("IW1", "Twister", 200, 200, 10));
+        forces.put("SS2", new Starship("SS2", "Enterprise", 300, 200, 10, 20));
+        forces.put("WB3", new WarBird("WB3", "Droop", 300, 100, false));
+        forces.put("IW4", new Wing("IW4", "Winger", 200, 400, 20));
+        forces.put("WB5", new WarBird("WB5", "Hang", 400, 300, true));
+        forces.put("SS6", new Starship("SS6", "Voyager", 450, 200, 15, 10));
+        forces.put("SS7", new Starship("SS7", "Explorer", 120, 65, 4, 5));
+        forces.put("WB9", new WarBird("WB9", "Hover", 300, 400, false));
+        forces.put("IW10", new Wing("IW10", "Flyer", 200, 100, 5));
+    }
+
+    /**
+     * Initialises the battles into the system.
+     */
+    private void setupBattles() {
+        forces.put(1, new Battle(1, "Fight", "Borg", 200, 300, 100));
+        forces.put(2, new Battle(2, "Skirmish", "Kardassians", 700, 200, 120));
+        forces.put(3, new Battle(3, "Ambush", "Ferengi", 100, 400, 150));
+        forces.put(4, new Battle(4, "Fight", "Ewoks", 600, 600, 200));
+        forces.put(5, new Battle(5, "Ambush", "Borg", 500, 400, 90));
+        forces.put(6, new Battle(6, "Skirmish", "Groaners", 150, 100, 100));
+        forces.put(7, new Battle(7, "Fight", "Borg", 150, 500, 300));
+        forces.put(8, new Battle(8, "Ambush", "Wailers", 300, 300, 300));
     }
 
     /**
