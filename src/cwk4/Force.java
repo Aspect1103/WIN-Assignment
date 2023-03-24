@@ -72,6 +72,6 @@ public class Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + reference + " - Name: " + name + " - Activation Fee: " + fee + " - Strength: " + strength + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
     }
 }
