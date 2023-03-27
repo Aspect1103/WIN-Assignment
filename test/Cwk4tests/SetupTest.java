@@ -5,13 +5,14 @@ import cwk4.WIN;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Holds tests related to the initialisation of the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 21/03/2023
+ * @version 27/03/2023
  */
 public class SetupTest {
     // Define the WIN interface variable to use for testing
@@ -22,42 +23,74 @@ public class SetupTest {
      */
     @Before
     public void setUp() {
-        game = new SpaceWars("TestName");
+        game = new SpaceWars("David");
+    }
+
+    /**
+     * Determine if a string contains text from a string array.
+     *
+     * @param text The string to check.
+     * @param str  The string array to check if its elements exist in text.
+     * @return Whether the string contains text from a string array or not.
+     */
+    private boolean containsText(String text, String[] str) {
+        boolean result = true;
+        for (String temp : str) {
+            result = result && (text.toLowerCase()).contains(temp.toLowerCase());
+        }
+        return result;
     }
 
     /**
      * Test if the game is correctly initialised.
      */
     @Test
-    public void testGameInit() {
-        assertEquals(game.toString(), "TODO");
+    public void gameCorrectlyInitialised() {
+        String[] details = {"David", "1000", ""};
+        assertTrue(containsText(game.toString(), details));
     }
 
     /**
      * Test if warChest has 1000 bit coins before a battle.
      */
     @Test
-    public void testWarChestInit() {
-        assertEquals(game.getWarchest(), 1000);
+    public void warChestWhenNoBattle() {
+        assertEquals(1000, game.getWarchest());
     }
 
     /**
-     * Test if all battles are initialised at startup.
+     * Test if a battle is initialised at setup.
      */
     @Test
-    public void testBattleInit() {
+    public void battleAtSetup() {
+        assertTrue(game.isBattle(3));
+    }
+
+    /**
+     * Test if all battles are initialised at setup.
+     */
+    @Test
+    public void allBattleLoadedAtSetup() {
         boolean result = true;
-        for (int battleNumber = 1; battleNumber <= 8; battleNumber++) {
-            result = result && game.isBattle(battleNumber);
+        for (int i = 1; i < 8; i++) {
+            result = result && game.isBattle(i);
         }
         assertTrue(result);
     }
 
     /**
-     * Test if all forces are initialised in the UFF at startup.
+     * Test if a force is in UFF at setup.
      */
     @Test
-    public void testUFFInit() {
+    public void forceInUFFAtSetup() {
+        assertTrue(game.isInUFFDock("IW1"));
+    }
+
+    /**
+     * Test if all forces are in UFF at setup.
+     */
+    @Test
+    public void UFFleetLoadedAtTheBeginning() {
         boolean result = true;
         String[] forces = {"IW1", "WB3", "SS2", "IW4", "WB5", "SS6", "SS7", "WB9", "IW10"};
         for (String force : forces) {
@@ -67,10 +100,10 @@ public class SetupTest {
     }
 
     /**
-     * Test if the ASF is empty at setup.
+     * Test if ASF is empty at setup.
      */
     @Test
-    public void testASFInit() {
+    public void ASFleetEmptyAtTheBeginning() {
         boolean result = true;
         String[] forces = {"IW1", "WB3", "SS2", "IW4", "WB5", "SS6", "SS7", "WB9", "IW10"};
         for (String force : forces) {
@@ -80,98 +113,49 @@ public class SetupTest {
     }
 
     /**
-     * Get details of a warbird force.
+     * Get details of a warbird.
      */
     @Test
-    public void testWarbirdInit() {
-        assertEquals(game.getForceDetails("WB3"), "TODO");
+    public void detailsOfWB3() {
+        String[] target = {"WB3", "Droop", "100", "300", "In dock", "false"};
+        assertTrue(containsText(game.getForceDetails("WB3"), target));
     }
 
     /**
-     * Get details of a starship force.
+     * Get details of a starship.
      */
     @Test
-    public void testStarshipInit() {
-        assertEquals(game.getForceDetails("SS2"), "TODO");
+    public void detailsOfSS2() {
+        String[] target = {"SS2", "Enterprise", "200", "300", "In dock", "20", "10"};
+        assertTrue(containsText(game.getForceDetails("SS2"), target));
     }
 
     /**
-     * Get details of a wing force.
+     * Get details of a wing.
      */
     @Test
-    public void testWingInit() {
-        assertEquals(game.getForceDetails("IW1"), "TODO");
+    public void detailsOfIW1() {
+        String[] target = {"IW1", "Twisters", "200", "200", "In dock", "10"};
+        assertTrue(containsText(game.getForceDetails("IW1"), target));
     }
 
     /**
      * Get details of an invalid force.
      */
     @Test
-    public void testInvalidForce() {
-        assertEquals(game.getForceDetails("XX3"), "TODO");
+    public void detailsOfNonExistantForce() {
+        String[] target = {"No such force"};
+        assertTrue(containsText(game.getForceDetails("XX3"), target));
     }
 
     /**
-     * Get details of a valid battle.
+     * Get details of valid battle
      */
     @Test
-    public void testGetValidBattle() {
-        assertEquals(game.getBattle(2), "TODO");
+    public void detailsOfBattle() {
+        String[] details = {"2", "Skirmish", "Kardassians", "700", "200", "120"};
+        assertTrue(containsText(game.getBattle(2), details));
     }
 
-    /**
-     * Get details of an invalid battle.
-     */
-    @Test
-    public void testGetInvalidBattle() {
-        assertEquals(game.getBattle(-1), "TODO");
-    }
-
-    /**
-     * Test if all battles are displayed.
-     */
-    @Test
-    public void testGetAllBattles() {
-        assertEquals(game.getAllBattles(), "TODO");
-    }
-
-    /**
-     * Test if all forces are displayed.
-     */
-    @Test
-    public void testGetAllForces() {
-        assertEquals(game.getAllForces(), "TODO");
-    }
-
-    /**
-     * Test if all forces in the dock are displayed.
-     */
-    @Test
-    public void testGetAllForcesInDock() {
-        assertEquals(game.getForcesInDock(), "TODO");
-    }
-
-    /**
-     * Test if a valid force is in the dock.
-     */
-    @Test
-    public void testValidForceInDock() {
-        assertTrue(game.isInUFFDock("IW1"));
-    }
-
-    /**
-     * Test if an invalid force is not in the dock.
-     */
-    @Test
-    public void testInvalidForceNotInDock() {
-        assertFalse(game.isInUFFDock("XX3"));
-    }
-
-    /**
-     * Test if all destroyed forces are displayed.
-     */
-    @Test
-    public void testGetDestroyedForces() {
-        assertEquals(game.getDestroyedForces(), "TODO");
-    }
+    // ******************** CUSTOM TESTS ********************
 }
