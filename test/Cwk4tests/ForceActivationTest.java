@@ -141,4 +141,51 @@ public class ForceActivationTest {
     }
 
     // ******************** CUSTOM TESTS ********************
+    /**
+     * Test if an invalid force can be activated.
+     */
+    @Test
+    public void invalidForceActivate() {}
+
+    /**
+     * Test if a valid force is activated correctly if warChest equals the activation cost.
+     */
+    @Test
+    public void forceActivationIfWarChestEqualsCost() {}
+
+    /**
+     * Test if a valid force can’t be activated if warChest is less than the activation cost.
+     */
+    @Test
+    public void forceActivationIfWarChestLessThanCost() {}
+
+    /**
+     * Test if a destroyed force can be reactivated
+     */
+    @Test
+    public void destroyedForceReactivation() {}
+
+    /**
+     * Test if an activated force can be activated.
+     */
+    @Test
+    public void activateActivatedForce() {}
+
+    /**
+     * Test if an invalid force activation fails if there are not enough bit coins.
+     */
+    @Test
+    public void invalidForceActivationIfNotEnoughBitCoins() {}
+
+    /**
+     * Test if an activated force is in the ASF.
+     */
+    @Test
+    public void activatedForceInASF() {}
+
+    /**
+     * Test if an inactivated force is in the ASF.
+     */
+    @Test
+    public void inactivatedForceInASF() {}
 }

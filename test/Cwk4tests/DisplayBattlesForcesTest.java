@@ -169,6 +169,4 @@ public class DisplayBattlesForcesTest {
     public void forceFleetIW10Displayed() {
         assertTrue(containsText(swim.getForcesInDock(), "IW10", "Flyers"));
     }
-
-    // ******************** CUSTOM TESTS ********************
 }

@@ -149,7 +149,7 @@ public class SetupTest {
     }
 
     /**
-     * Get details of valid battle
+     * Get details of valid battle.
      */
     @Test
     public void detailsOfBattle() {
@@ -158,4 +158,33 @@ public class SetupTest {
     }
 
     // ******************** CUSTOM TESTS ********************
+    /**
+     * Test if an invalid battle is initialised at setup
+     */
+    @Test
+    public void invalidBattleAtSetup() {}
+
+    /**
+     * Get details of an invalid battle.
+     */
+    @Test
+    public void detailsOfInvalidBattle() {}
+
+    /**
+     * Test if a valid force is in the dock.
+     */
+    @Test
+    public void validForceInDock() {}
+
+    /**
+     * Test if an invalid force is not in the dock.
+     */
+    @Test
+    public void invalidForceNotInDock() {}
+
+    /**
+     * Test if an invalid force is in the ASF.
+     */
+    @Test
+    public void invalidForceInASF() {}
 }
