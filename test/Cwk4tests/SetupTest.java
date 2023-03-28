@@ -5,8 +5,7 @@ import cwk4.WIN;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Holds tests related to the initialisation of the game.
@@ -143,7 +142,7 @@ public class SetupTest {
      * Get details of an invalid force.
      */
     @Test
-    public void detailsOfNonExistantForce() {
+    public void detailsOfNonExistentForce() {
         String[] target = {"No such force"};
         assertTrue(containsText(game.getForceDetails("XX3"), target));
     }
@@ -158,33 +157,37 @@ public class SetupTest {
     }
 
     // ******************** CUSTOM TESTS ********************
+
     /**
      * Test if an invalid battle is initialised at setup
      */
     @Test
-    public void invalidBattleAtSetup() {}
+    public void invalidBattleAtSetup() {
+        assertFalse(game.isBattle(-1));
+    }
 
     /**
      * Get details of an invalid battle.
      */
     @Test
-    public void detailsOfInvalidBattle() {}
-
-    /**
-     * Test if a valid force is in the dock.
-     */
-    @Test
-    public void validForceInDock() {}
+    public void detailsOfInvalidBattle() {
+        String[] target = {"No such battle"};
+        assertTrue(containsText(game.getBattle(-1), target));
+    }
 
     /**
      * Test if an invalid force is not in the dock.
      */
     @Test
-    public void invalidForceNotInDock() {}
+    public void invalidForceNotInDock() {
+        assertFalse(game.isInUFFDock("XX3"));
+    }
 
     /**
      * Test if an invalid force is in the ASF.
      */
     @Test
-    public void invalidForceInASF() {}
+    public void invalidForceInASF() {
+        assertFalse(game.isInASFleet("XX3"));
+    }
 }
