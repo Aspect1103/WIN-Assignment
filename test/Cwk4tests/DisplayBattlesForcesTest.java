@@ -26,28 +26,18 @@ public class DisplayBattlesForcesTest {
     }
 
     /**
-     * Determine if a given string contains two other strings.
+     * Determine if a string contains text from a string array.
      *
-     * @param text The string to check for containment.
-     * @param s1   The first string to check.
-     * @param s2   The second string to check.
-     * @return Whether a given string contains three other strings or not.
+     * @param text The string to check.
+     * @param str  The string array to check if its elements exist in text.
+     * @return Whether the string contains text from a string array or not.
      */
-    private boolean containsText(String text, String s1, String s2) {
-        return text.contains(s1) && text.contains(s2);
-    }
-
-    /**
-     * Determine if a given string contains three other strings.
-     *
-     * @param text The string to check for containment.
-     * @param s1   The first string to check.
-     * @param s2   The second string to check.
-     * @param s3   The third string to check.
-     * @return Whether a given string contains three other strings or not.
-     */
-    private boolean containsText(String text, String s1, String s2, String s3) {
-        return text.contains(s1) && text.contains(s2) && text.contains(s3);
+    private boolean containsText(String text, String[] str) {
+        boolean result = true;
+        for (String temp : str) {
+            result = result && (text.toLowerCase()).contains(temp.toLowerCase());
+        }
+        return result;
     }
 
     /**
@@ -55,7 +45,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo1Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "1", "Fight", "Borg"));
+        String[] battleOne = {"1", "Fight", "Borg"};
+        assertTrue(containsText(swim.getAllBattles(), battleOne));
     }
 
     /**
@@ -63,7 +54,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo2Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "2", "Skirmish", "Kardassians"));
+        String[] battleTwo = {"2", "Skirmish", "Kardassians"};
+        assertTrue(containsText(swim.getAllBattles(), battleTwo));
     }
 
     /**
@@ -71,7 +63,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo3Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "3", "Ambush", "Ferengi"));
+        String[] battleThree = {"3", "Ambush", "Ferengi"};
+        assertTrue(containsText(swim.getAllBattles(), battleThree));
     }
 
     /**
@@ -79,7 +72,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo4Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "4", "Fight", "Ewoks"));
+        String[] battleFour = {"4", "Fight", "Ewoks"};
+        assertTrue(containsText(swim.getAllBattles(), battleFour));
     }
 
     /**
@@ -87,7 +81,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo5Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "5", "Ambush", "Borg"));
+        String[] battleFive = {"5", "Ambush", "Borg"};
+        assertTrue(containsText(swim.getAllBattles(), battleFive));
     }
 
     /**
@@ -95,7 +90,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void battleNo6Displayed() {
-        assertTrue(containsText(swim.getAllBattles(), "6", "Skirmish", "Groaners"));
+        String[] battleSix = {"6", "Skirmish", "Groaners"};
+        assertTrue(containsText(swim.getAllBattles(), battleSix));
     }
 
     /**
@@ -103,7 +99,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW1Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "IW1", "Twisters"));
+        String[] forceIW1 = {"IW1", "Twisters"};
+        assertTrue(containsText(swim.getForcesInDock(), forceIW1));
     }
 
     /**
@@ -111,7 +108,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetSS2Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "SS2", "Enterprise"));
+        String[] forceSS2 = {"SS2", "Enterprise"};
+        assertTrue(containsText(swim.getForcesInDock(), forceSS2));
     }
 
     /**
@@ -119,7 +117,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetWB3Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "WB3", "Droop"));
+        String[] forceWB3 = {"WB3", "Droop"};
+        assertTrue(containsText(swim.getForcesInDock(), forceWB3));
     }
 
     /**
@@ -127,7 +126,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW4Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "IW4", "Wingers"));
+        String[] forceIW4 = {"IW4", "Wingers"};
+        assertTrue(containsText(swim.getForcesInDock(), forceIW4));
     }
 
     /**
@@ -135,7 +135,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetWB5Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "WB5", "Hang"));
+        String[] forceWB5 = {"WB5", "Hang"};
+        assertTrue(containsText(swim.getForcesInDock(), forceWB5));
     }
 
     /**
@@ -143,7 +144,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetSS6Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "SS6", "Voyager"));
+        String[] forceSS6 = {"SS6", "Voyager"};
+        assertTrue(containsText(swim.getForcesInDock(), forceSS6));
     }
 
     /**
@@ -151,7 +153,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetSS7Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "SS7", "Explorer"));
+        String[] forceSS7 = {"SS7", "Explorer"};
+        assertTrue(containsText(swim.getForcesInDock(), forceSS7));
     }
 
     /**
@@ -159,7 +162,8 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetWB9Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "WB9", "Hover"));
+        String[] forceWB9 = {"WB9", "Hover"};
+        assertTrue(containsText(swim.getForcesInDock(), forceWB9));
     }
 
     /**
@@ -167,6 +171,7 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW10Displayed() {
-        assertTrue(containsText(swim.getForcesInDock(), "IW10", "Flyers"));
+        String[] forceIW10 = {"IW10", "Flyers"};
+        assertTrue(containsText(swim.getForcesInDock(), forceIW10));
     }
 }
