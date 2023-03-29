@@ -227,36 +227,36 @@ public class SpaceWars implements WIN {
      * @return The initialised SpaceWars object.
      */
     public SpaceWars restoreGame(String fname) {
-
+        return new SpaceWars("d");
     }
 
     /**
      * Initialises the forces into the system.
      */
     private void setupForces() {
-        forces.put("IW1", new Wing("IW1", "Twister", 200, 200, 10));
-        forces.put("SS2", new Starship("SS2", "Enterprise", 300, 200, 10, 20));
-        forces.put("WB3", new WarBird("WB3", "Droop", 300, 100, false));
-        forces.put("IW4", new Wing("IW4", "Winger", 200, 400, 20));
-        forces.put("WB5", new WarBird("WB5", "Hang", 400, 300, true));
-        forces.put("SS6", new Starship("SS6", "Voyager", 450, 200, 15, 10));
-        forces.put("SS7", new Starship("SS7", "Explorer", 120, 65, 4, 5));
-        forces.put("WB9", new WarBird("WB9", "Hover", 300, 400, false));
-        forces.put("IW10", new Wing("IW10", "Flyer", 200, 100, 5));
+        forces.put("IW1", new Wing("IW1", "Twister", 200, 10));
+        forces.put("SS2", new StarShip("SS2", "Enterprise", 10, 20));
+        forces.put("WB3", new WarBird("WB3", "Droop", 100, false));
+        forces.put("IW4", new Wing("IW4", "Winger", 200, 20));
+        forces.put("WB5", new WarBird("WB5", "Hang", 300, true));
+        forces.put("SS6", new StarShip("SS6", "Voyager", 15, 10));
+        forces.put("SS7", new StarShip("SS7", "Explorer", 4, 5));
+        forces.put("WB9", new WarBird("WB9", "Hover", 400, false));
+        forces.put("IW10", new Wing("IW10", "Flyer", 200, 5));
     }
 
     /**
      * Initialises the battles into the system.
      */
     private void setupBattles() {
-        forces.put(1, new Battle(1, "Fight", "Borg", 200, 300, 100));
-        forces.put(2, new Battle(2, "Skirmish", "Kardassians", 700, 200, 120));
-        forces.put(3, new Battle(3, "Ambush", "Ferengi", 100, 400, 150));
-        forces.put(4, new Battle(4, "Fight", "Ewoks", 600, 600, 200));
-        forces.put(5, new Battle(5, "Ambush", "Borg", 500, 400, 90));
-        forces.put(6, new Battle(6, "Skirmish", "Groaners", 150, 100, 100));
-        forces.put(7, new Battle(7, "Fight", "Borg", 150, 500, 300));
-        forces.put(8, new Battle(8, "Ambush", "Wailers", 300, 300, 300));
+        battles.put(1, new Battle(1, BattleType.FIGHT, "Borg", 200, 300, 100));
+        battles.put(2, new Battle(2, BattleType.SKIRMISH, "Kardassians", 700, 200, 120));
+        battles.put(3, new Battle(3, BattleType.AMBUSH, "Ferengi", 100, 400, 150));
+        battles.put(4, new Battle(4, BattleType.FIGHT, "Ewoks", 600, 600, 200));
+        battles.put(5, new Battle(5, BattleType.AMBUSH, "Borg", 500, 400, 90));
+        battles.put(6, new Battle(6, BattleType.SKIRMISH, "Groaners", 150, 100, 100));
+        battles.put(7, new Battle(7, BattleType.FIGHT, "Borg", 150, 500, 300));
+        battles.put(8, new Battle(8, BattleType.AMBUSH, "Wailers", 300, 300, 300));
     }
 
     /**
