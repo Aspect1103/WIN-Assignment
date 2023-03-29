@@ -27,14 +27,14 @@ public class Force {
      * @param inASF       Is the Force in the ASF
      * @param isDestroyed Is the force destroyed?
      */
-    public Force(String ref, String nme, int cost, int strngth, boolean inUFF, boolean inASF, boolean isDestroyed) {
+    public Force(String ref, String nme, int cost, int strngth) {
         reference = ref;
         name = nme;
         fee = cost;
         strength = strngth;
-        this.inUFF = inUFF;
-        this.inASF = inASF;
-        this.isDestroyed = isDestroyed;
+        inUFF = true;
+        inASF = false;
+        isDestroyed = false;
     }
 
     /**
