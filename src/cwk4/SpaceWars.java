@@ -45,7 +45,7 @@ public class SpaceWars implements WIN {
      * @return A string representation of the state of the game.
      **/
     public String toString() {
-        return "";
+        return "<Admiral: " + name + " - Current War Chest: " + warChest + " - Defeated? " + isDefeated() + " - Current ASF: " + getASFleet();
     }
 
     /**

@@ -12,20 +12,29 @@ public class Force {
     private final String name;
     private final int fee;
     private final int strength;
+    private final boolean inUFF;
+    private final boolean inASF;
+    private final boolean isDestroyed;
 
     /**
      * Constructs a force object.
      *
-     * @param ref     The force's reference.
-     * @param nme     The force's name.
-     * @param cost    The force's activation fee.
-     * @param strngth The force's strength.
+     * @param ref         The force's reference.
+     * @param nme         The force's name.
+     * @param cost        The force's activation fee.
+     * @param strngth     The force's strength.
+     * @param inUFF       Is the Force in the UFF
+     * @param inASF       Is the Force in the ASF
+     * @param isDestroyed Is the force destroyed?
      */
-    public Force(String ref, String nme, int cost, int strngth) {
+    public Force(String ref, String nme, int cost, int strngth, boolean inUFF, boolean inASF, boolean isDestroyed) {
         reference = ref;
         name = nme;
         fee = cost;
         strength = strngth;
+        this.inUFF = inUFF;
+        this.inASF = inASF;
+        this.isDestroyed = isDestroyed;
     }
 
     /**
