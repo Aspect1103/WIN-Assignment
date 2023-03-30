@@ -9,26 +9,26 @@ package cwk4;
  */
 public class Force {
     private final String reference;
+    private final ForceState forceState;
     private final String name;
     private final int fee;
     private final int strength;
-    private final boolean inUFF;
-    private final boolean inASF;
-    private final boolean isDestroyed;
+    private  boolean inUFF;
+    private  boolean inASF;
+    private  boolean isDestroyed;
 
     /**
      * Constructs a force object.
      *
      * @param ref         The force's reference.
+     * @param state        The force's state.
      * @param nme         The force's name.
      * @param cost        The force's activation fee.
      * @param strngth     The force's strength.
-     * @param inUFF       Is the Force in the UFF
-     * @param inASF       Is the Force in the ASF
-     * @param isDestroyed Is the force destroyed?
      */
-    public Force(String ref, String nme, int cost, int strngth) {
+    public Force(String ref, ForceState state ,String nme, int cost, int strngth) {
         reference = ref;
+        forceState = state;
         name = nme;
         fee = cost;
         strength = strngth;
@@ -87,6 +87,12 @@ public class Force {
      */
     public boolean getinASF() {
         return inASF;
+    }
+    /**
+     * Set if the force is inASF
+     */
+    public void setinASF(boolean value) {
+        inASF = value;
     }
     /**
      * Get if the force is inUFF
