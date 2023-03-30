@@ -1,5 +1,6 @@
 package cwk4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,6 +15,7 @@ public class SpaceWars implements WIN {
     private final int warChest = 1000;
     private final HashMap<String, Force> forces = new HashMap<String, Force>();
     private final HashMap<Integer, Battle> battles = new HashMap<Integer, Battle>();
+
 
     /**
      * Constructs a SpaceWars object.
@@ -45,7 +47,7 @@ public class SpaceWars implements WIN {
      * @return A string representation of the state of the game.
      **/
     public String toString() {
-        return "<Admiral: " + name + " - Current War Chest: " + warChest + " - Defeated? " + isDefeated() + " - Current ASF: " + getASFleet();
+        return "< Admiral Name: " + name + " - Current War Chest: " + warChest + " - Defeated " + isDefeated() + " - Current ASF: " + getASFleet() + " >";
     }
 
     /**
@@ -56,6 +58,9 @@ public class SpaceWars implements WIN {
      * @return Whether the admiral is defeated or not.
      */
     public boolean isDefeated() {
+//        if(warChest <= 0 && getASFleet() == ""){
+//            return true;
+//        }
         return false;
     }
 
@@ -75,6 +80,7 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the system.
      */
     public String getAllForces() {
+
         return "";
     }
 
