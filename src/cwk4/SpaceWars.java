@@ -1,6 +1,7 @@
 package cwk4;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 /**
@@ -36,6 +37,8 @@ public class SpaceWars implements WIN {
      */
     public SpaceWars(String admiral, String filename) {
         name = admiral;
+        setupForces();
+        readBattles("filename.txt");
     }
 
     /**
@@ -388,6 +391,20 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file storing the battles.
      */
     private void readBattles(String fname) {
-
+//        try (Scanner scan = new Scanner(new File("battles.txt"))) {
+//            int i = 0;
+//            while (scan.hasNextLine()) {
+//                String line = scan.nextLine();
+//                String[] tokens = line.split(",");
+//                BattleType battleType =  BattleType. (tokens[0]);
+//                String enmy = tokens[1];
+//                int strength = Integer.parseInt(tokens[2]);
+//                int loss = Integer.parseInt(tokens[3]);
+//                int gain = Integer.parseInt(tokens[4]);
+//                battles.put(i+1, new Battle(i+1, BattleType. tokens[0], enmy,  strength, loss,  gain));
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 }
