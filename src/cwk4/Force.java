@@ -72,6 +72,33 @@ public class Force {
     public int getStrength() {
         return strength;
     }
+    /**
+     * Get if the force is inUFF
+     *
+     * @return boolean.
+     */
+    public boolean getinUFF() {
+        return inUFF;
+    }
+    /**
+     * Get if the force is inASF
+     *
+     * @return boolean.
+     */
+    public boolean getinASF() {
+        return inASF;
+    }
+    /**
+     * Get if the force is inUFF
+     *
+     * @return boolean.
+     */
+    public boolean getisDestroyed() {
+        return  isDestroyed;
+    }
+
+
+
 
     /**
      * Get a human-readable representation of this object including the

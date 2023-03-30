@@ -94,6 +94,11 @@ public class SpaceWars implements WIN {
      * @return Whether the force is in the UFF dock or not.
      **/
     public boolean isInUFFDock(String ref) {
+        for (String key : forces.keySet()) {
+            if (forces.get(key).getinUFF() && key.equals(ref)) {
+                return true;
+            }
+        }
         return false;
     }
 
