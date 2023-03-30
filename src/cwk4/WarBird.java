@@ -41,6 +41,6 @@ public class WarBird extends Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "< Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Cloaking Device: " + isCloaking() + " >";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Cloaking Device: " + isCloaking() + ">";
     }
 }

@@ -98,6 +98,6 @@ public class Battle {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "< Battle number: " + battleNumber + " - Battle Type: " + battleType + " - Enemy: " + enemy + " - Enemy Strength: " + enemyStrength + " - Losses: " + losses + " - Gains: " + gains + " >";
+        return "<Battle number: " + battleNumber + " - Battle Type: " + battleType + " - Enemy: " + enemy + " - Enemy Strength: " + enemyStrength + " - Losses: " + losses + " - Gains: " + gains + ">";
     }
 }

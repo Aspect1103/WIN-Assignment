@@ -9,26 +9,25 @@ package cwk4;
  */
 public class Force {
     private final String reference;
-//    private final ForceState forceState;
+    // private final ForceState forceState;
     private final String name;
     private final int fee;
     private final int strength;
-    private  boolean inUFF;
-    private  boolean inASF;
-    private  boolean isDestroyed;
+    private final boolean inUFF;
+    private boolean inASF;
+    private boolean isDestroyed;
 
     /**
      * Constructs a force object.
      *
-     * @param ref         The force's reference.
-     * @param state        The force's state.
-     * @param nme         The force's name.
-     * @param cost        The force's activation fee.
-     * @param strngth     The force's strength.
+     * @param ref     The force's reference.
+     * @param nme     The force's name.
+     * @param cost    The force's activation fee.
+     * @param strngth The force's strength.
      */
-    public Force(String ref ,String nme, int cost, int strngth) {
+    public Force(String ref, String nme, int cost, int strngth) {
         reference = ref;
-//        forceState = state;
+        // forceState = state;
         name = nme;
         fee = cost;
         strength = strngth;
@@ -72,45 +71,51 @@ public class Force {
     public int getStrength() {
         return strength;
     }
+
     /**
-     * Get if the force is inUFF
+     * Get if the force is in the UFF.
      *
-     * @return boolean.
+     * @return Whether the force is in the UFF or not.
      */
     public boolean getinUFF() {
         return inUFF;
     }
+
     /**
-     * Get if the force is inASF
+     * Get if the force is in the ASF or not.
      *
-     * @return boolean.
+     * @return Whether the force is in the ASF or not.
      */
     public boolean getinASF() {
         return inASF;
     }
+
     /**
-     * Set if the force is inASF
+     * Set if the force is in the ASF or not.
+     *
+     * @param value Whether the force is in the ASF or not.
      */
     public void setinASF(boolean value) {
         inASF = value;
     }
+
     /**
-     * Get if the force  isDestroyed
+     * Get if the force is destroyed or not.
      *
-     * @return boolean.
+     * @return Whether the force is destroyed or not.
      */
     public boolean getisDestroyed() {
-        return  isDestroyed;
+        return isDestroyed;
     }
+
     /**
-     * Set the force isDestroyed.
+     * Set the force is destroyed or not.
+     *
+     * @param value Whether the force is destroyed or not.
      */
     public void setisDestroyed(boolean value) {
-          isDestroyed = value;
+        isDestroyed = value;
     }
-
-
-
 
     /**
      * Get a human-readable representation of this object including the
@@ -120,6 +125,6 @@ public class Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "< Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " >";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
     }
 }

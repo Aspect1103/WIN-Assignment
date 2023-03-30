@@ -1,7 +1,7 @@
 package cwk4;
+
 import java.io.*;
 import java.util.HashMap;
-import java.util.Scanner;
 
 
 /**
@@ -13,10 +13,9 @@ import java.util.Scanner;
  */
 public class SpaceWars implements WIN {
     private final String name;
-    private  int warChest = 1000;
     private final HashMap<String, Force> forces = new HashMap<String, Force>();
     private final HashMap<Integer, Battle> battles = new HashMap<Integer, Battle>();
-
+    private int warChest = 1000;
 
     /**
      * Constructs a SpaceWars object.
@@ -50,7 +49,7 @@ public class SpaceWars implements WIN {
      * @return A string representation of the state of the game.
      **/
     public String toString() {
-        return "< Admiral Name: " + name + " - Current War Chest: " + warChest + " - Defeated " + isDefeated() + " - Current ASF: " + getASFleet() + " >";
+        return "<Admiral Name: " + name + " - Current War Chest: " + warChest + " - Defeated " + isDefeated() + " - Current ASF: " + getASFleet() + ">";
     }
 
     /**
@@ -61,10 +60,7 @@ public class SpaceWars implements WIN {
      * @return Whether the admiral is defeated or not.
      */
     public boolean isDefeated() {
-        if(warChest <= 0 && getASFleet() == ""){
-            return true;
-        }
-        return false;
+        return warChest <= 0 && getASFleet().equals("");
     }
 
     /**
@@ -83,11 +79,11 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the system.
      */
     public String getAllForces() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : forces.keySet()) {
-            sb.append(forces.get(key)).append("\n");
+        String s = "";
+        for (Force value : forces.values()) {
+            s += value + "\n";
         }
-        return sb.toString();
+        return s;
     }
 
     /**
@@ -97,12 +93,8 @@ public class SpaceWars implements WIN {
      * @return Whether the force is in the UFF dock or not.
      **/
     public boolean isInUFFDock(String ref) {
-        for (String key : forces.keySet()) {
-            if (forces.get(key).getinUFF() && key.equals(ref)) {
-                return true;
-            }
-        }
-        return false;
+        Force force = forces.get(ref);
+        return force != null && force.getinUFF();
     }
 
     /**
@@ -111,16 +103,14 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the UFF dock.
      **/
     public String getForcesInDock() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : forces.keySet()) {
-            if (forces.get(key).getinUFF()) {
-                sb.append(forces.get(key)).append("\n");
-
+        String s = "";
+        for (Force value : forces.values()) {
+            if (value.getinUFF()) {
+                s += value + "\n";
             }
         }
-        return sb.toString();
+        return s;
     }
-
 
     /**
      * Get a list of all destroyed forces in the system.
@@ -128,14 +118,13 @@ public class SpaceWars implements WIN {
      * @return A list of all destroyed forces in the system.
      */
     public String getDestroyedForces() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : forces.keySet()) {
-            if (!forces.get(key).getinUFF()) {
-                sb.append(forces.get(key)).append("\n");
-
+        String s = "";
+        for (Force value : forces.values()) {
+            if (value.getisDestroyed()) {
+                s += value + "\n";
             }
         }
-        return sb.toString();
+        return s;
     }
 
     /**
@@ -146,15 +135,8 @@ public class SpaceWars implements WIN {
      * @return The force's details from a given force reference.
      **/
     public String getForceDetails(String ref) {
-        StringBuilder sb = new StringBuilder();
-        for (String key : forces.keySet()) {
-            if (key.equals(ref)) {
-                sb.append(forces.get(key)).append("\n");
-            } else{
-                    return "\nNo such force";
-                }
-        }
-        return sb.toString();
+        Force force = forces.get(ref);
+        return force != null ? force.toString() : "No such force";
     }
 
     /**
@@ -192,13 +174,8 @@ public class SpaceWars implements WIN {
      * @return Whether the given force reference exists in the ASF.
      **/
     public boolean isInASFleet(String ref) {
-        for (HashMap.Entry<String, Force> entry : forces.entrySet()) {
-            String key = entry.getKey();
-            Force value = entry.getValue();
-            if (value.getinASF() && key.equals(ref)) {
-                return true;
-            }}
-        return false;
+        Force force = forces.get(ref);
+        return force != null && force.getinASF();
     }
 
     /**
@@ -207,14 +184,13 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the ASF.
      **/
     public String getASFleet() {
-        StringBuilder sb = new StringBuilder();
-        for (HashMap.Entry<String, Force> entry : forces.entrySet()) {
-            String key = entry.getKey();
-            Force value = entry.getValue();
-            if (value.getinASF() ) {
-                sb.append(value).append("\n");
-            }}
-        return sb.toString();
+        String s = "";
+        for (Force value : forces.values()) {
+            if (value.getinASF()) {
+                s += value + "\n";
+            }
+        }
+        return s;
     }
 
     /**
@@ -228,7 +204,8 @@ public class SpaceWars implements WIN {
             Force value = entry.getValue();
             if (value.getinASF() && key.equals(ref)) {
                 value.setinASF(false);
-            }}
+            }
+        }
     }
 
     /**
@@ -238,13 +215,8 @@ public class SpaceWars implements WIN {
      * @return Whether the given number represents a battle or not.
      **/
     public boolean isBattle(int num) {
-        for (HashMap.Entry<Integer, Battle> entry : battles.entrySet()) {
-            Integer key = entry.getKey();
-            Battle value = entry.getValue();
-            if (key.equals(num)) {
-                return true;
-            }}
-        return false;
+        Battle battle = battles.get(num);
+        return battle != null;
     }
 
     /**
@@ -255,15 +227,8 @@ public class SpaceWars implements WIN {
      * @return The battle's details from a given battle number.
      **/
     public String getBattle(int num) {
-        StringBuilder sb = new StringBuilder();
-        for (HashMap.Entry<Integer, Battle> entry : battles.entrySet()) {
-            Integer key = entry.getKey();
-            Battle value = entry.getValue();
-            if (key.equals(num)) {
-                sb.append(value).append("\n");
-                return sb.toString();
-            }}
-        return "No such battle";
+        Battle battle = battles.get(num);
+        return battle != null ? battle.toString() : "No such battle";
     }
 
     /**
@@ -272,13 +237,11 @@ public class SpaceWars implements WIN {
      * @return A list of all battles in the system.
      **/
     public String getAllBattles() {
-        StringBuilder sb = new StringBuilder();
-        for (HashMap.Entry<Integer, Battle> entry : battles.entrySet()) {
-            Integer key = entry.getKey();
-            Battle value = entry.getValue();
-            sb.append(value).append("\n");
-            }
-        return sb.toString();
+        String s = "";
+        for (Battle value : battles.values()) {
+            s += value + "\n";
+        }
+        return s;
     }
 
     /**
@@ -305,25 +268,54 @@ public class SpaceWars implements WIN {
             for (HashMap.Entry<String, Force> entry2 : forces.entrySet()) {
                 String forceKey = entry2.getKey();
                 Force forceValue = entry2.getValue();
-                     if(forceValue.getinASF() && battleKey.equals(battleNo)){
-                         if(forceValue.getStrength()>= battleValue.getEnemyStrength()){
-                             warChest += battleValue.getGains();
-                             return 0;
-                         }else if(!forceValue.getinASF()){
-                             warChest -= battleValue.getLosses();
-                             return 1;
-                         }else if(forceValue.getStrength() < battleValue.getEnemyStrength()){
-                             warChest -= battleValue.getLosses();
-                             forceValue.setisDestroyed(true);
-                             forces.remove(forceKey);
-                             return 2;
-                         }
-                         }else if(warChest == 0 && !forceValue.getinASF()){
-                             return 3;
-                         }
-        }}
+                if (forceValue.getinASF() && battleKey.equals(battleNo)) {
+                    if (forceValue.getStrength() >= battleValue.getEnemyStrength()) {
+                        warChest += battleValue.getGains();
+                        return 0;
+                    } else if (!forceValue.getinASF()) {
+                        warChest -= battleValue.getLosses();
+                        return 1;
+                    } else if (forceValue.getStrength() < battleValue.getEnemyStrength()) {
+                        warChest -= battleValue.getLosses();
+                        forceValue.setisDestroyed(true);
+                        forces.remove(forceKey);
+                        return 2;
+                    }
+                } else if (warChest == 0 && !forceValue.getinASF()) {
+                    return 3;
+                }
+            }
+        }
         return -1;
+    }
 
+    /**
+     * Initialises the forces into the system.
+     */
+    private void setupForces() {
+        forces.put("IW1", new Wing("IW1", "Twister", 200, 10));
+        forces.put("SS2", new StarShip("SS2", "Enterprise", 10, 20));
+        forces.put("WB3", new WarBird("WB3", "Droop", 100, false));
+        forces.put("IW4", new Wing("IW4", "Winger", 200, 20));
+        forces.put("WB5", new WarBird("WB5", "Hang", 300, true));
+        forces.put("SS6", new StarShip("SS6", "Voyager", 15, 10));
+        forces.put("SS7", new StarShip("SS7", "Explorer", 4, 5));
+        forces.put("WB9", new WarBird("WB9", "Hover", 400, false));
+        forces.put("IW10", new Wing("IW10", "Flyer", 200, 5));
+    }
+
+    /**
+     * Initialises the battles into the system.
+     */
+    private void setupBattles() {
+        battles.put(1, new Battle(1, BattleType.FIGHT, "Borg", 200, 300, 100));
+        battles.put(2, new Battle(2, BattleType.SKIRMISH, "Kardassians", 700, 200, 120));
+        battles.put(3, new Battle(3, BattleType.AMBUSH, "Ferengi", 100, 400, 150));
+        battles.put(4, new Battle(4, BattleType.FIGHT, "Ewoks", 600, 600, 200));
+        battles.put(5, new Battle(5, BattleType.AMBUSH, "Borg", 500, 400, 90));
+        battles.put(6, new Battle(6, BattleType.SKIRMISH, "Groaners", 150, 100, 100));
+        battles.put(7, new Battle(7, BattleType.FIGHT, "Borg", 150, 500, 300));
+        battles.put(8, new Battle(8, BattleType.AMBUSH, "Wailers", 300, 300, 300));
     }
 
     /**
@@ -354,35 +346,6 @@ public class SpaceWars implements WIN {
             e.printStackTrace();
             return null;
         }
-    }
-
-    /**
-     * Initialises the forces into the system.
-     */
-    private void setupForces() {
-        forces.put("IW1", new Wing("IW1", "Twisters", 200, 10));
-        forces.put("SS2", new StarShip("SS2", "Enterprise", 10, 20));
-        forces.put("WB3", new WarBird("WB3", "Droop", 100, false));
-        forces.put("IW4", new Wing("IW4", "Wingers", 200, 20));
-        forces.put("WB5", new WarBird("WB5", "Hang", 300, true));
-        forces.put("SS6", new StarShip("SS6", "Voyager", 15, 10));
-        forces.put("SS7", new StarShip("SS7", "Explorer", 4, 5));
-        forces.put("WB9", new WarBird("WB9", "Hovers", 400, false));
-        forces.put("IW10", new Wing("IW10", "Flyers", 200, 5));
-    }
-
-    /**
-     * Initialises the battles into the system.
-     */
-    private void setupBattles() {
-        battles.put(1, new Battle(1, BattleType.FIGHT, "Borg", 200, 300, 100));
-        battles.put(2, new Battle(2, BattleType.SKIRMISH, "Kardassians", 700, 200, 120));
-        battles.put(3, new Battle(3, BattleType.AMBUSH, "Ferengi", 100, 400, 150));
-        battles.put(4, new Battle(4, BattleType.FIGHT, "Ewoks", 600, 600, 200));
-        battles.put(5, new Battle(5, BattleType.AMBUSH, "Borg", 500, 400, 90));
-        battles.put(6, new Battle(6, BattleType.SKIRMISH, "Groaners", 150, 100, 100));
-        battles.put(7, new Battle(7, BattleType.FIGHT, "Borg", 150, 500, 300));
-        battles.put(8, new Battle(8, BattleType.AMBUSH, "Wailers", 300, 300, 300));
     }
 
     /**
