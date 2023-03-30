@@ -1,6 +1,5 @@
 package cwk4;
-
-import java.util.ArrayList;
+import java.io.*;
 import java.util.HashMap;
 
 
@@ -310,13 +309,11 @@ public class SpaceWars implements WIN {
                          }else if(!forceValue.getinASF()){
                              warChest -= battleValue.getLosses();
                              return 1;
-
                          }else if(forceValue.getStrength() < battleValue.getEnemyStrength()){
                              warChest -= battleValue.getLosses();
                              forceValue.setisDestroyed(true);
                              forces.remove(forceKey);
                              return 2;
-
                          }
                          }else if(warChest == 0 && !forceValue.getinASF()){
                              return 3;
@@ -332,7 +329,11 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file to store the game state.
      */
     public void saveGame(String fname) {
-
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fname))) {
+            oos.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -343,7 +344,13 @@ public class SpaceWars implements WIN {
      * @return The initialised SpaceWars object.
      */
     public SpaceWars restoreGame(String fname) {
-        return new SpaceWars("d");
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fname))) {
+            SpaceWars spaceWars = (SpaceWars) in.readObject();
+            return spaceWars;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
