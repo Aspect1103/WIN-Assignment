@@ -9,7 +9,7 @@ package cwk4;
  */
 public class Force {
     private final String reference;
-    private final ForceState forceState;
+//    private final ForceState forceState;
     private final String name;
     private final int fee;
     private final int strength;
@@ -26,9 +26,9 @@ public class Force {
      * @param cost        The force's activation fee.
      * @param strngth     The force's strength.
      */
-    public Force(String ref, ForceState state ,String nme, int cost, int strngth) {
+    public Force(String ref ,String nme, int cost, int strngth) {
         reference = ref;
-        forceState = state;
+//        forceState = state;
         name = nme;
         fee = cost;
         strength = strngth;
@@ -95,12 +95,18 @@ public class Force {
         inASF = value;
     }
     /**
-     * Get if the force is inUFF
+     * Get if the force  isDestroyed
      *
      * @return boolean.
      */
     public boolean getisDestroyed() {
         return  isDestroyed;
+    }
+    /**
+     * Set the force isDestroyed.
+     */
+    public void setisDestroyed(boolean value) {
+          isDestroyed = value;
     }
 
 

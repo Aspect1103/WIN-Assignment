@@ -297,7 +297,33 @@ public class SpaceWars implements WIN {
      * @return An integer showing the result of the battle.
      */
     public int doBattle(int battleNo) {
-        return 999;
+        for (HashMap.Entry<Integer, Battle> entry : battles.entrySet()) {
+            Integer battleKey = entry.getKey();
+            Battle battleValue = entry.getValue();
+            for (HashMap.Entry<String, Force> entry2 : forces.entrySet()) {
+                String forceKey = entry2.getKey();
+                Force forceValue = entry2.getValue();
+                     if(forceValue.getinASF() && battleKey.equals(battleNo)){
+                         if(forceValue.getStrength()>= battleValue.getEnemyStrength()){
+                             warChest += battleValue.getGains();
+                             return 0;
+                         }else if(!forceValue.getinASF()){
+                             warChest -= battleValue.getLosses();
+                             return 1;
+
+                         }else if(forceValue.getStrength() < battleValue.getEnemyStrength()){
+                             warChest -= battleValue.getLosses();
+                             forceValue.setisDestroyed(true);
+                             forces.remove(forceKey);
+                             return 2;
+
+                         }
+                         }else if(warChest == 0 && !forceValue.getinASF()){
+                             return 3;
+                         }
+        }}
+        return -1;
+
     }
 
     /**
