@@ -58,9 +58,9 @@ public class SpaceWars implements WIN {
      * @return Whether the admiral is defeated or not.
      */
     public boolean isDefeated() {
-//        if(warChest <= 0 && getASFleet() == ""){
-//            return true;
-//        }
+        if(warChest <= 0 && getASFleet() == ""){
+            return true;
+        }
         return false;
     }
 
@@ -80,8 +80,11 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the system.
      */
     public String getAllForces() {
-
-        return "";
+        StringBuilder sb = new StringBuilder();
+        for (String key : forces.keySet()) {
+            sb.append("Reference: ").append(key).append(", Force : ").append(forces.get(key)).append("\n");
+        }
+        return sb.toString();
     }
 
     /**
