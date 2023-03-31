@@ -233,11 +233,4 @@ public class BattleTest {
         game.doBattle(4);
         assertTrue(game.isDefeated());
     }
-
-    // ******************** CUSTOM TESTS ********************
-    /**
-     * Test if the admiral is not defeated if they have no more forces but still have bit coins.
-     */
-    @Test
-    public void notDefeatedWhenNoForcesAndCoins() {}
 }
