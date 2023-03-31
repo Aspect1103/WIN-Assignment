@@ -135,6 +135,7 @@ public class SetupTest {
     @Test
     public void detailsOfIW1() {
         String[] target = {"IW1", "Twisters", "200", "200", "In dock", "10"};
+        System.out.println(game.getForceDetails("IW1"));
         assertTrue(containsText(game.getForceDetails("IW1"), target));
     }
 

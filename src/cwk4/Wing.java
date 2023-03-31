@@ -40,6 +40,6 @@ public class Wing extends Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Striker Count: " + getStrikers() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getFee() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Striker Count: " + getStrikers() + ">";
     }
 }

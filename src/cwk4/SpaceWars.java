@@ -2,6 +2,7 @@ package cwk4;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 
@@ -95,7 +96,7 @@ public class SpaceWars implements WIN {
      **/
     public boolean isInUFFDock(String ref) {
         Force force = forces.get(ref);
-        return force != null && force.getinUFF();
+        return force != null && force.isDocked();
     }
 
     /**
@@ -106,7 +107,7 @@ public class SpaceWars implements WIN {
     public String getForcesInDock() {
         String s = "";
         for (Force value : forces.values()) {
-            if (value.getinUFF()) {
+            if (value.isDocked()) {
                 s += value + "\n";
             }
         }
@@ -121,7 +122,7 @@ public class SpaceWars implements WIN {
     public String getDestroyedForces() {
         String s = "";
         for (Force value : forces.values()) {
-            if (value.getisDestroyed()) {
+            if (value.isDestroyed()) {
                 s += value + "\n";
             }
         }
@@ -151,21 +152,19 @@ public class SpaceWars implements WIN {
      * bit coins, or -1 if the force doesn't exist.
      **/
     public int activateForce(String ref) {
-        for (HashMap.Entry<String, Force> entry : forces.entrySet()) {
-            String key = entry.getKey();
-            Force value = entry.getValue();
-            if (getWarchest() >= value.getFee() && key.equals(ref)) {
-                value.setinASF(true);
-//                ForceState("active");
-                warChest -= value.getFee();
-                return 0;
-            } else if (!isInUFFDock(key) && key.equals(ref) || value.getisDestroyed() && key.equals(ref)) {
-                return 1;
-            } else if (getWarchest() < value.getFee() && key.equals(ref)) {
-                return 2;
-            }
+        Force force = forces.get(ref);
+
+        if (force == null) {
+            return -1;
+        } else if (getWarchest() >= force.getFee()) {
+            force.setActive();
+            warChest -= force.getFee();
+            return 0;
+        } else if (!force.isDocked() || force.isDestroyed()) {
+            return 1;
+        } else {
+            return 2;
         }
-        return -1;
     }
 
     /**
@@ -176,7 +175,7 @@ public class SpaceWars implements WIN {
      **/
     public boolean isInASFleet(String ref) {
         Force force = forces.get(ref);
-        return force != null && force.getinASF();
+        return force != null && force.isActive();
     }
 
     /**
@@ -187,7 +186,7 @@ public class SpaceWars implements WIN {
     public String getASFleet() {
         String s = "";
         for (Force value : forces.values()) {
-            if (value.getinASF()) {
+            if (value.isActive()) {
                 s += value + "\n";
             }
         }
@@ -200,12 +199,11 @@ public class SpaceWars implements WIN {
      * @param ref The reference of the force.
      **/
     public void recallForce(String ref) {
-        for (HashMap.Entry<String, Force> entry : forces.entrySet()) {
-            String key = entry.getKey();
-            Force value = entry.getValue();
-            if (value.getinASF() && key.equals(ref)) {
-                value.setinASF(false);
-            }
+        Force force = forces.get(ref);
+
+        if (force != null && force.isActive()) {
+            force.setInDock();
+            // TODO: FINISH RECALL
         }
     }
 
@@ -263,28 +261,25 @@ public class SpaceWars implements WIN {
      * @return An integer showing the result of the battle.
      */
     public int doBattle(int battleNo) {
-        for (HashMap.Entry<Integer, Battle> entry : battles.entrySet()) {
-            Integer battleKey = entry.getKey();
-            Battle battleValue = entry.getValue();
-            for (HashMap.Entry<String, Force> entry2 : forces.entrySet()) {
-                String forceKey = entry2.getKey();
-                Force forceValue = entry2.getValue();
-                if (forceValue.getinASF() && battleKey.equals(battleNo)) {
-                    if (forceValue.getStrength() >= battleValue.getEnemyStrength()) {
-                        warChest += battleValue.getGains();
-                        return 0;
-                    } else if (!forceValue.getinASF()) {
-                        warChest -= battleValue.getLosses();
-                        return 1;
-                    } else if (forceValue.getStrength() < battleValue.getEnemyStrength()) {
-                        warChest -= battleValue.getLosses();
-                        forceValue.setisDestroyed(true);
-                        forces.remove(forceKey);
-                        return 2;
-                    }
-                } else if (warChest == 0 && !forceValue.getinASF()) {
-                    return 3;
-                }
+        Battle battle = battles.get(battleNo);
+
+        if (battle == null) {
+            return -1;
+        }
+
+        for (Entry<String, Force> force : forces.entrySet()) {
+            if (force.getValue().getStrength() >= battle.getEnemyStrength()) {
+                warChest += battle.getGains();
+                return 0;
+            } else if (!force.getValue().isActive()) {
+                warChest -= battle.getLosses();
+            } else if (force.getValue().getStrength() < battle.getEnemyStrength()) {
+                warChest -= battle.getLosses();
+                force.getValue().setDestroyed();
+                forces.remove(force.getKey());
+                return 2;
+            } else if (getWarchest() == 0 && force.getValue().isActive()) {
+                return 3;
             }
         }
         return -1;

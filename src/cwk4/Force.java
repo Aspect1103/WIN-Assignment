@@ -9,13 +9,10 @@ package cwk4;
  */
 public class Force {
     private final String reference;
-    // private final ForceState forceState;
     private final String name;
     private final int fee;
     private final int strength;
-    private final boolean inUFF;
-    private boolean inASF;
-    private boolean isDestroyed;
+    private ForceState forceState;
 
     /**
      * Constructs a force object.
@@ -27,13 +24,10 @@ public class Force {
      */
     public Force(String ref, String nme, int cost, int strngth) {
         reference = ref;
-        // forceState = state;
         name = nme;
         fee = cost;
         strength = strngth;
-        inUFF = true;
-        inASF = false;
-        isDestroyed = false;
+        forceState = ForceState.DOCKED;
     }
 
     /**
@@ -73,48 +67,66 @@ public class Force {
     }
 
     /**
-     * Get if the force is in the UFF.
+     * Get the force's state.
      *
-     * @return Whether the force is in the UFF or not.
+     * @return The force's state.
      */
-    public boolean getinUFF() {
-        return inUFF;
+    public ForceState getForceState() {
+        return forceState;
     }
 
     /**
-     * Get if the force is in the ASF or not.
+     * Determine if the force is in the UFF dock or not.
      *
-     * @return Whether the force is in the ASF or not.
+     * @return Whether the force is in the UFF dock or not.
      */
-    public boolean getinASF() {
-        return inASF;
+    public boolean isDocked() {
+        return forceState == ForceState.DOCKED;
     }
 
     /**
-     * Set if the force is in the ASF or not.
+     * Determine if the force is active or not.
      *
-     * @param value Whether the force is in the ASF or not.
+     * @return Whether the force is active or not.
      */
-    public void setinASF(boolean value) {
-        inASF = value;
+    public boolean isActive() {
+        return forceState == ForceState.ACTIVE;
     }
 
     /**
-     * Get if the force is destroyed or not.
+     * Determine if the force is destroyed or not.
      *
      * @return Whether the force is destroyed or not.
      */
-    public boolean getisDestroyed() {
-        return isDestroyed;
+    public boolean isDestroyed() {
+        return forceState == ForceState.DOCKED;
     }
 
     /**
-     * Set the force is destroyed or not.
-     *
-     * @param value Whether the force is destroyed or not.
+     * Set the force's state to docked.
      */
-    public void setisDestroyed(boolean value) {
-        isDestroyed = value;
+    public void setInDock() {
+        if (forceState == ForceState.ACTIVE) {
+            forceState = ForceState.DOCKED;
+        }
+    }
+
+    /**
+     * Set the force's state to active.
+     */
+    public void setActive() {
+        if (forceState == ForceState.DOCKED) {
+            forceState = ForceState.ACTIVE;
+        }
+    }
+
+    /**
+     * Set the force's state to destroyed.
+     */
+    public void setDestroyed() {
+        if (forceState == ForceState.ACTIVE) {
+            forceState = ForceState.DOCKED;
+        }
     }
 
     /**
@@ -125,6 +137,6 @@ public class Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getForceState() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
     }
 }
