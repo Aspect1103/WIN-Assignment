@@ -33,6 +33,22 @@ public class Wing extends Force {
     }
 
     /**
+     * Determines if the wing can fight in a given battle.
+     *
+     * @param battleType The battle to check if the force can fight in.
+     * @return Whether the wing can fight in the battle or not.
+     */
+    public boolean canFight(BattleType battleType) {
+        switch (battleType) {
+            case SKIRMISH:
+            case AMBUSH:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * Get a human-readable representation of this object including the
      * force reference, the force name, the activation cost, the force
      * strength, and the striker count.
@@ -40,6 +56,6 @@ public class Wing extends Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getFee() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Striker Count: " + getStrikers() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getForceState() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Striker Count: " + getStrikers() + ">";
     }
 }

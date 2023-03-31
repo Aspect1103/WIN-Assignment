@@ -154,17 +154,18 @@ public class SpaceWars implements WIN {
     public int activateForce(String ref) {
         Force force = forces.get(ref);
 
-        if (force == null) {
-            return -1;
-        } else if (getWarchest() >= force.getFee()) {
-            force.setActive();
-            warChest -= force.getFee();
-            return 0;
-        } else if (!force.isDocked() || force.isDestroyed()) {
-            return 1;
-        } else {
-            return 2;
+        if (force != null) {
+            if (force.isActive()) {
+                return 1;
+            } else if (getWarchest() >= force.getFee()) {
+                force.setActive();
+                warChest -= force.getFee();
+                return 0;
+            } else {
+                return 2;
+            }
         }
+        return -1;
     }
 
     /**
@@ -203,7 +204,7 @@ public class SpaceWars implements WIN {
 
         if (force != null && force.isActive()) {
             force.setInDock();
-            // TODO: FINISH RECALL
+            warChest += force.getFee() / 2;
         }
     }
 
@@ -267,22 +268,29 @@ public class SpaceWars implements WIN {
             return -1;
         }
 
-        for (Entry<String, Force> force : forces.entrySet()) {
-            if (force.getValue().getStrength() >= battle.getEnemyStrength()) {
+        for (Force force : forces.values()) {
+            if (!force.isActive() || !force.canFight(battle.getBattleType())) {
+                continue;
+            }
+
+            if (force.getStrength() >= battle.getEnemyStrength()) {
                 warChest += battle.getGains();
+                System.out.println(0);
                 return 0;
-            } else if (!force.getValue().isActive()) {
+            } else {
                 warChest -= battle.getLosses();
-            } else if (force.getValue().getStrength() < battle.getEnemyStrength()) {
-                warChest -= battle.getLosses();
-                force.getValue().setDestroyed();
-                forces.remove(force.getKey());
+                force.setDestroyed();
+                forces.remove(force.getReference());
                 return 2;
-            } else if (getWarchest() == 0 && force.getValue().isActive()) {
-                return 3;
             }
         }
-        return -1;
+
+        if (isDefeated()) {
+            return 3;
+        } else {
+            warChest -= battle.getLosses();
+            return 1;
+        }
     }
 
     /**

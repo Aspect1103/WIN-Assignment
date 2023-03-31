@@ -7,7 +7,7 @@ package cwk4;
  * @author Klevi, Jack, Luke, Abdulla
  * @version 23/03/2023
  */
-public class Force {
+abstract public class Force {
     private final String reference;
     private final String name;
     private final int fee;
@@ -99,7 +99,7 @@ public class Force {
      * @return Whether the force is destroyed or not.
      */
     public boolean isDestroyed() {
-        return forceState == ForceState.DOCKED;
+        return forceState == ForceState.DESTROYED;
     }
 
     /**
@@ -128,6 +128,14 @@ public class Force {
             forceState = ForceState.DOCKED;
         }
     }
+
+    /**
+     * Determines if the force can fight in a given battle.
+     *
+     * @param battleType The battle to check if the force can fight in.
+     * @return Whether the force can fight in the battle or not.
+     */
+    abstract boolean canFight(BattleType battleType);
 
     /**
      * Get a human-readable representation of this object including the
