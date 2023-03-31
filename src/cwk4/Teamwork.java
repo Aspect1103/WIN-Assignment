@@ -9,6 +9,9 @@ package cwk4;
 public class Teamwork {
     private final String[] details = new String[13];
 
+    /**
+     * Constructs a Teamwork object.
+     */
     public Teamwork() {
         // Team name
         details[0] = "12";
@@ -19,8 +22,8 @@ public class Teamwork {
         details[3] = "20035866";
 
         // Second team member's details
-        details[4] = "Klevi";
-        details[5] = "Alliu";
+        details[4] = "Alliu";
+        details[5] = "Klevi";
         details[6] = "20067052";
 
         // Third team member's details
@@ -34,10 +37,18 @@ public class Teamwork {
         details[12] = "20075156";
     }
 
+    /**
+     * Get the details of the stored team.
+     *
+     * @return A string array of the team's details.
+     */
     public String[] getTeamDetails() {
         return details;
     }
 
+    /**
+     * Displays the team's details.
+     */
     public void displayDetails() {
         for (String temp : details) {
             System.out.println(temp);
