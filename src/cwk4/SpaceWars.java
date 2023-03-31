@@ -2,6 +2,7 @@ package cwk4;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 /**
@@ -37,7 +38,7 @@ public class SpaceWars implements WIN {
     public SpaceWars(String admiral, String filename) {
         name = admiral;
         setupForces();
-        readBattles("filename.txt");
+        readBattles(filename);
     }
 
     /**
@@ -324,8 +325,8 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file to store the game state.
      */
     public void saveGame(String fname) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fname))) {
-            oos.writeObject(this);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fname))) {
+            outputStream.writeObject(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -339,9 +340,8 @@ public class SpaceWars implements WIN {
      * @return The initialised SpaceWars object.
      */
     public SpaceWars restoreGame(String fname) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fname))) {
-            SpaceWars spaceWars = (SpaceWars) in.readObject();
-            return spaceWars;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fname))) {
+            return (SpaceWars) inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -354,20 +354,34 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file storing the battles.
      */
     private void readBattles(String fname) {
-//        try (Scanner scan = new Scanner(new File("battles.txt"))) {
-//            int i = 0;
-//            while (scan.hasNextLine()) {
-//                String line = scan.nextLine();
-//                String[] tokens = line.split(",");
-//                BattleType battleType =  BattleType. (tokens[0]);
-//                String enmy = tokens[1];
-//                int strength = Integer.parseInt(tokens[2]);
-//                int loss = Integer.parseInt(tokens[3]);
-//                int gain = Integer.parseInt(tokens[4]);
-//                battles.put(i+1, new Battle(i+1, BattleType. tokens[0], enmy,  strength, loss,  gain));
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try (Scanner scanner = new Scanner(new File(fname))) {
+            int battleNumber = 1;
+            while (scanner.hasNextLine()) {
+                String[] tokens = scanner.nextLine().split(",");
+                BattleType battleType;
+                switch (tokens[0]) {
+                    case "Skirmish":
+                        battleType = BattleType.SKIRMISH;
+                        break;
+                    case "Ambush":
+                        battleType = BattleType.AMBUSH;
+                        break;
+                    case "Fight":
+                        battleType = BattleType.FIGHT;
+                        break;
+                    default:
+                        battleType = null;
+                }
+
+                String enemyName = tokens[1];
+                int strength = Integer.parseInt(tokens[2]);
+                int loss = Integer.parseInt(tokens[3]);
+                int gain = Integer.parseInt(tokens[4]);
+                battles.put(battleNumber, new Battle(battleNumber, battleType, enemyName, strength, loss, gain));
+                battleNumber++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
