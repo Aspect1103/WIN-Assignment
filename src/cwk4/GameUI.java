@@ -28,7 +28,6 @@ public class GameUI {
         int choice;
         System.out.println("Enter admiral's name@:");
         String s = scanner.nextLine();
-
         WIN gp = new SpaceWars(s);
         choice = 100;
         while (choice != 0) {
