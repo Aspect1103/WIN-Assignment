@@ -22,8 +22,8 @@ public class Teamwork {
         details[3] = "20035866";
 
         // Second team member's details
-        details[4] = "Klevi";
-        details[5] = "Alliu";
+        details[4] = "Alliu";
+        details[5] = "Klevi";
         details[6] = "20067052";
 
         // Third team member's details

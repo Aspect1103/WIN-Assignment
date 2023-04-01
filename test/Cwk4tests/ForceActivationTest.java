@@ -5,8 +5,7 @@ import cwk4.WIN;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Holds tests related to the force activation.
@@ -141,51 +140,39 @@ public class ForceActivationTest {
     }
 
     // ******************** CUSTOM TESTS ********************
+
     /**
      * Test if an invalid force can be activated.
      */
     @Test
-    public void invalidForceActivate() {}
+    public void invalidForceActivate() {
+        assertEquals(game.activateForce("XX3"), -1);
+    }
 
     /**
-     * Test if a valid force is activated correctly if warChest equals the activation cost.
+     * Test if a destroyed force can be reactivated.
      */
     @Test
-    public void forceActivationIfWarChestEqualsCost() {}
-
-    /**
-     * Test if a valid force can’t be activated if warChest is less than the activation cost.
-     */
-    @Test
-    public void forceActivationIfWarChestLessThanCost() {}
-
-    /**
-     * Test if a destroyed force can be reactivated
-     */
-    @Test
-    public void destroyedForceReactivation() {}
+    public void destroyedForceReactivation() {
+        game.activateForce("IW1");
+        game.doBattle(2);
+        assertEquals(game.activateForce("IW1"), 1);
+    }
 
     /**
      * Test if an activated force can be activated.
      */
     @Test
-    public void activateActivatedForce() {}
-
-    /**
-     * Test if an invalid force activation fails if there are not enough bit coins.
-     */
-    @Test
-    public void invalidForceActivationIfNotEnoughBitCoins() {}
-
-    /**
-     * Test if an activated force is in the ASF.
-     */
-    @Test
-    public void activatedForceInASF() {}
+    public void activateActivatedForce() {
+        game.activateForce("IW1");
+        assertEquals(game.activateForce("IW1"), 1);
+    }
 
     /**
      * Test if an inactivated force is in the ASF.
      */
     @Test
-    public void inactivatedForceInASF() {}
+    public void inactivatedForceInASF() {
+        assertFalse(game.isInASFleet("IW1"));
+    }
 }
