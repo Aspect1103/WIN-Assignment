@@ -63,12 +63,22 @@ public class GameGUI {
         // Set up the main components
         JPanel listingPanel = new JPanel();
         JButton fightButton = new JButton("Fight");
+        JButton listASFButton = new JButton("list ASF");
         JPanel eastPanel = new JPanel();
 
-        listingPanel.setLayout(null); // set the layout to null
         listingPanel.setBackground(Color.WHITE); // set the background color
-        listingPanel.setVisible(false);
+        listingPanel.setVisible(true);
+        listingPanel.add(listASFButton);
+
         frame.add(eastPanel, BorderLayout.EAST);
+        frame.add(listingPanel, BorderLayout.WEST);
+
+        listASFButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, game.getASFleet());
+        });
+        listASFButton.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
+        listASFButton.setForeground(Color.WHITE); // set the text color to white
+        listASFButton.setBackground(Color.BLUE);
 
         // Set up the east panel
         eastPanel.setLayout(new GridLayout(4, 1, 0, 10)); // add some vertical spacing
