@@ -4,27 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Provides a GUI interface for the game
+ * Provides a GUI interface for the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 30/03/2023
+ * @version 01/04/2023
  */
 public class GameGUI {
     private final WIN game = new SpaceWars("Horatio");
-    private  JFrame frame = new JFrame("Game GUI");
+    private final JFrame frame = new JFrame("Game GUI");
     private final JTextArea listing = new JTextArea();
-    private final JLabel codeLabel = new JLabel();
-    private final JButton fightBtn = new JButton("Fight");
+    private final JPanel listingPanel = new JPanel();
+    private final JButton fightButton = new JButton("Fight");
+    private final JButton listASFButton = new JButton("List ASF");
+    private final JButton activateForce = new JButton("Activate Force");
     private final JPanel eastPanel = new JPanel();
 
     /**
-     * Constructs a gameGUI object.
+     * Constructs a game GUI object.
      */
     public GameGUI() {
-        frame.setPreferredSize(new Dimension(800, 600)); // set the preferred size of the frame
+        frame.setPreferredSize(new Dimension(800, 600));
         frame.setLocation(500, 200);
         makeFrame();
-        makeMenuBar(frame);
+        makeMenuBar();
     }
 
     /**
@@ -37,36 +39,9 @@ public class GameGUI {
     }
 
     /**
-     * Create the main frame's menu bar.
-     */
-    private void makeMenuBar(JFrame frame) {
-        // Create a menubar
-        JMenuBar menubar = new JMenuBar();
-        frame.setJMenuBar(menubar);
-
-        // Create the forces menu
-        JMenu forcesMenu = new JMenu("Forces");
-        menubar.add(forcesMenu);
-
-        // Add a list of forces menu item to the forces menu
-        JMenuItem listForcesItem = new JMenuItem("List All Forces ");
-        listForcesItem.addActionListener(e -> {
-            listing.setVisible(true);
-            listing.setText(game.getAllForces());
-        });
-    }
-
-    /**
      * Create the Swing frame and its content.
      */
     private void makeFrame() {
-        // Set up the main components
-        JPanel listingPanel = new JPanel();
-        JButton fightButton = new JButton("Fight");
-        JButton listASFButton = new JButton("List ASF");
-        JButton activateForce = new JButton("Activate Force");
-        JPanel eastPanel = new JPanel();
-
         listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
         listingPanel.setBackground(Color.WHITE); // set the background color
         listingPanel.setVisible(true);
@@ -78,9 +53,7 @@ public class GameGUI {
         frame.add(eastPanel, BorderLayout.EAST);
         frame.add(listingPanel, BorderLayout.WEST);
 
-        listASFButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame, game.getASFleet());
-        });
+        listASFButton.addActionListener(e -> JOptionPane.showMessageDialog(frame, game.getASFleet()));
         listASFButton.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
         listASFButton.setForeground(Color.WHITE); // set the text color to white
         listASFButton.setBackground(Color.BLUE);
@@ -114,35 +87,62 @@ public class GameGUI {
     }
 
     /**
+     * Create the main frame's menu bar.
+     */
+    private void makeMenuBar() {
+        // Create a menubar
+        JMenuBar menubar = new JMenuBar();
+        frame.setJMenuBar(menubar);
+
+        // Create the forces menu
+        JMenu forcesMenu = new JMenu("Forces");
+        menubar.add(forcesMenu);
+
+        // Add a list of forces menu item to the forces menu
+        JMenuItem listForcesItem = new JMenuItem("List All Forces ");
+        listForcesItem.addActionListener(e -> {
+            listing.setVisible(true);
+            listing.setText(game.getAllForces());
+        });
+    }
+
+    /**
      * Process the result of a battle.
      *
      * @param code The result of the battle.
      * @return A string representation of the result of a battle.
      */
     private String fighting(int code) {
-        return switch (code) {
-            case 0 -> "Fight won";
-            case 1 -> "Fight lost as no suitable force available";
-            case 2 -> "Fight lost on battle strength, force destroyed";
-            case 3 -> "fight is lost and admiral completely defeated ";
-            default -> "No such fight";
-        };
+        switch (code) {
+            case 0:
+                return "Battle won";
+            case 1:
+                return "Battle lost as no suitable force available";
+            case 2:
+                return "Battle lost on battle strength so force is destroyed";
+            case 3:
+                return "Battle is lost and admiral is completely defeated";
+            default:
+                return "No such battle";
+        }
     }
+
     /**
-     * Process the result of activating a Force.
+     * Process the result of activating a force.
      *
-     * @param code The result of activating a Force.
-     * @return A string representation of the result of activating a Force.
+     * @param code The result of activating a force.
+     * @return A string representation of the result of activating a force.
      */
     private String activatingForce(int code) {
-        return switch (code) {
-            case 0 -> "Force is activated";
-            case 1 -> "Force is not in the UFF dock or is destroyed";
-            case 2 -> "Not enough money";
-            case 3 -> "fight is lost and admiral completely defeated ";
-            default -> "No such force";
-        };
+        switch (code) {
+            case 0:
+                return "Force is activated";
+            case 1:
+                return "Force is not in the UFF dock or is destroyed";
+            case 2:
+                return "Not enough money";
+            default:
+                return "No such force";
+        }
     }
-
-
 }
