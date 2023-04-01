@@ -44,6 +44,22 @@ public class StarShip extends Force {
     }
 
     /**
+     * Determines if the starship can fight in a given battle.
+     *
+     * @param battleType The battle to check if the force can fight in.
+     * @return Whether the starship can fight in the battle or not.
+     */
+    public boolean canFight(BattleType battleType) {
+        switch (battleType) {
+            case SKIRMISH:
+            case FIGHT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * Get a human-readable representation of this object including the
      * force reference, the force name, the activation cost, the force
      * strength, the laser cannon count, and the photon torpedo count.
@@ -51,6 +67,6 @@ public class StarShip extends Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Laser Cannon Count: " + getLaserCannons() + " - Photon Torpedo Count: " + getPhotonTorpedoes() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getForceState() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Laser Cannon Count: " + getLaserCannons() + " - Photon Torpedo Count: " + getPhotonTorpedoes() + ">";
     }
 }

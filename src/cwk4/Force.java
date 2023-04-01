@@ -7,11 +7,12 @@ package cwk4;
  * @author Klevi, Jack, Luke, Abdulla
  * @version 23/03/2023
  */
-public class Force {
+abstract public class Force {
     private final String reference;
     private final String name;
     private final int fee;
     private final int strength;
+    private ForceState forceState;
 
     /**
      * Constructs a force object.
@@ -26,6 +27,7 @@ public class Force {
         name = nme;
         fee = cost;
         strength = strngth;
+        forceState = ForceState.DOCKED;
     }
 
     /**
@@ -65,6 +67,77 @@ public class Force {
     }
 
     /**
+     * Get the force's state.
+     *
+     * @return The force's state.
+     */
+    public ForceState getForceState() {
+        return forceState;
+    }
+
+    /**
+     * Determine if the force is in the UFF dock or not.
+     *
+     * @return Whether the force is in the UFF dock or not.
+     */
+    public boolean isDocked() {
+        return forceState == ForceState.DOCKED;
+    }
+
+    /**
+     * Determine if the force is active or not.
+     *
+     * @return Whether the force is active or not.
+     */
+    public boolean isActive() {
+        return forceState == ForceState.ACTIVE;
+    }
+
+    /**
+     * Determine if the force is destroyed or not.
+     *
+     * @return Whether the force is destroyed or not.
+     */
+    public boolean isDestroyed() {
+        return forceState == ForceState.DESTROYED;
+    }
+
+    /**
+     * Set the force's state to docked.
+     */
+    public void setInDock() {
+        if (forceState == ForceState.ACTIVE) {
+            forceState = ForceState.DOCKED;
+        }
+    }
+
+    /**
+     * Set the force's state to active.
+     */
+    public void setActive() {
+        if (forceState == ForceState.DOCKED) {
+            forceState = ForceState.ACTIVE;
+        }
+    }
+
+    /**
+     * Set the force's state to destroyed.
+     */
+    public void setDestroyed() {
+        if (forceState == ForceState.ACTIVE) {
+            forceState = ForceState.DESTROYED;
+        }
+    }
+
+    /**
+     * Determines if the force can fight in a given battle.
+     *
+     * @param battleType The battle to check if the force can fight in.
+     * @return Whether the force can fight in the battle or not.
+     */
+    abstract boolean canFight(BattleType battleType);
+
+    /**
      * Get a human-readable representation of this object including the
      * force reference, the force name, the activation cost, and the force
      * strength.
@@ -72,6 +145,6 @@ public class Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getForceState() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + ">";
     }
 }
