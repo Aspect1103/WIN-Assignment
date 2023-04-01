@@ -125,7 +125,7 @@ abstract public class Force {
      */
     public void setDestroyed() {
         if (forceState == ForceState.ACTIVE) {
-            forceState = ForceState.DOCKED;
+            forceState = ForceState.DESTROYED;
         }
     }
 

@@ -155,7 +155,7 @@ public class SpaceWars implements WIN {
         Force force = forces.get(ref);
 
         if (force != null) {
-            if (force.isActive()) {
+            if (!force.isDocked()) {
                 return 1;
             } else if (getWarchest() >= force.getFee()) {
                 force.setActive();
@@ -275,12 +275,10 @@ public class SpaceWars implements WIN {
 
             if (force.getStrength() >= battle.getEnemyStrength()) {
                 warChest += battle.getGains();
-                System.out.println(0);
                 return 0;
             } else {
                 warChest -= battle.getLosses();
                 force.setDestroyed();
-                forces.remove(force.getReference());
                 return 2;
             }
         }
