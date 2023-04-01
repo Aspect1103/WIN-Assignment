@@ -3,25 +3,31 @@ package cwk4;
 import java.util.Scanner;
 
 /**
- * Provide a command line user interface
+ * Provides a command-line user interface for the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 31/03/2023
+ * @version 01/04/2023
  */
 public class GameUI {
-    private final Scanner myIn = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Runs the command-line interface.
+     *
+     * @param args A string array of CLI arguments.
+     */
     public static void main(String[] args) {
         GameUI myGame = new GameUI();
         myGame.playGame();
     }
 
+    /**
+     * Play the game.
+     */
     private void playGame() {
         int choice;
-        String admiralName;
-        int result = -1;
         System.out.println("Enter admiral's name");
-        String s = myIn.nextLine();
+        String s = scanner.nextLine();
 
         WIN gp = new SpaceWars(s);
         choice = 100;
@@ -36,14 +42,14 @@ public class GameUI {
                 String ref = (s).trim();
                 System.out.println(gp.getForceDetails(ref));
             } else if (choice == 4) {  // activate Force
-                myIn.nextLine();
+                scanner.nextLine();
                 String ref = (s).trim();
                 System.out.println(gp.activateForce(ref));
             } else if (choice == 5) { //  List ASFleet
                 System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
                 System.out.println("Enter Battle Number");
-                int battlenum = myIn.nextInt();
+                int battlenum = scanner.nextInt();
                 System.out.println(gp.doBattle(battlenum));
             } else if (choice == 7) {  // recall force
                 gp.recallForce(s);
@@ -60,7 +66,6 @@ public class GameUI {
         }
         System.out.println("Thank-you");
     }
-
 
     private int getMenuItem() {
         int choice = 100;
