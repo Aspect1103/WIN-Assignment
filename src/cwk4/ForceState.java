@@ -3,19 +3,30 @@ package cwk4;
 import java.io.Serializable;
 
 /**
- * Enumeration class ForceState
+ * Stores the different force states available.
  *
- * @author A.Marczyk
- * @version 02/11/2019
+ * @author Klevi, Jack, Luke, Abdulla
+ * @version 31/03/2023
  */
 public enum ForceState implements Serializable {
-    DOCKED(" In dock"), ACTIVE(" Active"), DESTROYED(" destroyed");
-    private String state;
+    DOCKED("In dock"), ACTIVE("Active"), DESTROYED("Destroyed");
+    private final String state;
 
+    /**
+     * Constructs a battle type enum.
+     *
+     * @param st The type of force state.
+     */
     private ForceState(String st) {
         state = st;
     }
 
+    /**
+     * Get a human-readable representation of this enum and the
+     * battle scenario it represents.
+     *
+     * @return A string representation of this enum.
+     */
     public String toString() {
         return state;
     }
