@@ -5,11 +5,16 @@ import java.util.Scanner;
 /**
  * Provide a command line user interface
  *
- * @author A.A.Marczyk
- * @version 06/10/23
+ * @author Klevi, Jack, Luke, Abdulla
+ * @version 31/03/2023
  */
 public class GameUI {
-    private Scanner myIn = new Scanner(System.in);
+    private final Scanner myIn = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        GameUI myGame = new GameUI();
+        myGame.playGame();
+    }
 
     private void playGame() {
         int choice;
@@ -17,6 +22,7 @@ public class GameUI {
         int result = -1;
         System.out.println("Enter admiral's name");
         String s = myIn.nextLine();
+
         WIN gp = new SpaceWars(s);
         choice = 100;
         while (choice != 0) {
@@ -27,30 +33,33 @@ public class GameUI {
                 System.out.println(gp.getAllBattles());
             } else if (choice == 3) {  // get Force
                 System.out.println("Enter Force reference");
-                myIn.nextLine();
-                String ref = (myIn.nextLine()).trim();
+                String ref = (s).trim();
                 System.out.println(gp.getForceDetails(ref));
             } else if (choice == 4) {  // activate Force
-
+                myIn.nextLine();
+                String ref = (s).trim();
+                System.out.println(gp.activateForce(ref));
             } else if (choice == 5) { //  List ASFleet
-
+                System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
-
+                System.out.println("Enter Battle Number");
+                int battlenum = myIn.nextInt();
+                System.out.println(gp.doBattle(battlenum));
             } else if (choice == 7) {  // recall force
-
+                gp.recallForce(s);
             } else if (choice == 8) {  // view game state
+                System.out.println(gp);
+            }
+
+            else if (choice == 9) {  // Task 3.5 only
+                System.out.println("Write to file");
+                gp.saveGame("battles.txt");
+            }
+            else if (choice == 10) {  // Task 3.5 only
+                System.out.println("Restore from file");
+                gp = gp.restoreGame("olenka.txt");
                 System.out.println(gp.toString());
             }
-            // Uncomment after task 3.5
-//             else if (choice == 9) {  // Task 3.5 only
-//                 System.out.println("Write to file");
-//                 gp.saveGame("battles.txt");
-//             }
-//             else if (choice == 10) {  // Task 3.5 only
-//                 System.out.println("Restore from file");
-//                 gp = gp.restoreGame("olenka.txt");
-//                 System.out.println(gp.toString());               
-//             }  
         }
         System.out.println("Thank-you");
     }
@@ -67,9 +76,8 @@ public class GameUI {
         System.out.println("6. Engage in a battle");
         System.out.println("7. Recall a force");
         System.out.println("8. View the state of the game");
-        //For Task 3.5 only
-//         System.out.println("9. Save this game");
-//         System.out.println("10. Restore a game");
+        System.out.println("9. Save this game");
+        System.out.println("10. Restore a game");
 
         while (choice < 0 || choice > 10) {
             System.out.println("Enter the number of your choice");
@@ -91,10 +99,5 @@ public class GameUI {
             default:
                 return "Error";
         }
-    }
-
-    public static void main(String[] args) {
-        GameUI myGame = new GameUI();
-        myGame.playGame();
     }
 }
