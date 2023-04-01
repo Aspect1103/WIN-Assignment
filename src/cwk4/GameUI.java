@@ -49,13 +49,10 @@ public class GameUI {
                 gp.recallForce(s);
             } else if (choice == 8) {  // view game state
                 System.out.println(gp);
-            }
-
-            else if (choice == 9) {  // Task 3.5 only
+            } else if (choice == 9) {  // Task 3.5 only
                 System.out.println("Write to file");
                 gp.saveGame("battles.txt");
-            }
-            else if (choice == 10) {  // Task 3.5 only
+            } else if (choice == 10) {  // Task 3.5 only
                 System.out.println("Restore from file");
                 gp = gp.restoreGame("olenka.txt");
                 System.out.println(gp.toString());
@@ -63,6 +60,7 @@ public class GameUI {
         }
         System.out.println("Thank-you");
     }
+
 
     private int getMenuItem() {
         int choice = 100;
