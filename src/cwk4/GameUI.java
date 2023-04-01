@@ -26,7 +26,7 @@ public class GameUI {
      */
     private void playGame() {
         int choice;
-        System.out.println("Enter admiral's name");
+        System.out.println("Enter admiral's name@:");
         String s = scanner.nextLine();
 
         WIN gp = new SpaceWars(s);
