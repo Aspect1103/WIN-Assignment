@@ -63,12 +63,17 @@ public class GameGUI {
         // Set up the main components
         JPanel listingPanel = new JPanel();
         JButton fightButton = new JButton("Fight");
-        JButton listASFButton = new JButton("list ASF");
+        JButton listASFButton = new JButton("List ASF");
+        JButton activateForce = new JButton("Activate Force");
         JPanel eastPanel = new JPanel();
 
+        listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
         listingPanel.setBackground(Color.WHITE); // set the background color
         listingPanel.setVisible(true);
+        listingPanel.add(Box.createVerticalStrut(10)); // Add space of 10 pixels between the buttons
         listingPanel.add(listASFButton);
+        listingPanel.add(Box.createVerticalStrut(10)); // Add space of 10 pixels between the buttons
+        listingPanel.add(activateForce);
 
         frame.add(eastPanel, BorderLayout.EAST);
         frame.add(listingPanel, BorderLayout.WEST);
@@ -80,6 +85,14 @@ public class GameGUI {
         listASFButton.setForeground(Color.WHITE); // set the text color to white
         listASFButton.setBackground(Color.BLUE);
 
+        activateForce.addActionListener(e -> {
+            String forceNum = JOptionPane.showInputDialog("Force reference ? ");
+            JOptionPane.showMessageDialog(frame, activatingForce(game.activateForce(forceNum)));
+        });
+        activateForce.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
+        activateForce.setForeground(Color.WHITE); // set the text color to white
+        activateForce.setBackground(Color.BLUE);
+
         // Set up the east panel
         eastPanel.setLayout(new GridLayout(4, 1, 0, 10)); // add some vertical spacing
         eastPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // add some padding
@@ -87,7 +100,7 @@ public class GameGUI {
 
         // Set up the fight button
         fightButton.addActionListener(e -> {
-            int battleNumber = Integer.parseInt(JOptionPane.showInputDialog("Fight number ?: "));
+            int battleNumber = Integer.parseInt(JOptionPane.showInputDialog("Fight number ? "));
             JOptionPane.showMessageDialog(frame, fighting(game.doBattle(battleNumber)));
         });
         fightButton.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
@@ -107,16 +120,29 @@ public class GameGUI {
      * @return A string representation of the result of a battle.
      */
     private String fighting(int code) {
-        switch (code) {
-            case 0:
-                return "Fight won";
-            case 1:
-                return "Fight lost as no suitable force available";
-            case 2:
-                return "Fight lost on battle strength, force destroyed";
-            case 3:
-                return "fight is lost and admiral completely defeated ";
-        }
-        return "No such fight";
+        return switch (code) {
+            case 0 -> "Fight won";
+            case 1 -> "Fight lost as no suitable force available";
+            case 2 -> "Fight lost on battle strength, force destroyed";
+            case 3 -> "fight is lost and admiral completely defeated ";
+            default -> "No such fight";
+        };
     }
+    /**
+     * Process the result of activating a Force.
+     *
+     * @param code The result of activating a Force.
+     * @return A string representation of the result of activating a Force.
+     */
+    private String activatingForce(int code) {
+        return switch (code) {
+            case 0 -> "Force is activated";
+            case 1 -> "Force is not in the UFF dock or is destroyed";
+            case 2 -> "Not enough money";
+            case 3 -> "fight is lost and admiral completely defeated ";
+            default -> "No such force";
+        };
+    }
+
+
 }
