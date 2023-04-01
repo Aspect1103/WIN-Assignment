@@ -34,6 +34,23 @@ public class WarBird extends Force {
     }
 
     /**
+     * Determines if the warbird can fight in a given battle.
+     *
+     * @param battleType The battle to check if the force can fight in.
+     * @return Whether the force can fight in the battle or not.
+     */
+    public boolean canFight(BattleType battleType) {
+        switch (battleType) {
+            case AMBUSH:
+                return isCloaking();
+            case FIGHT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * Get a human-readable representation of this object including the
      * force reference, the force name, the activation cost, the force
      * strength, and whether the warbird has a cloaking device or not.
@@ -41,6 +58,6 @@ public class WarBird extends Force {
      * @return A string representation of this object.
      */
     public String toString() {
-        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Cloaking Device: " + isCloaking() + ">";
+        return "<Force Reference: " + getReference() + " - Name: " + getName() + " - Force State: " + getForceState() + " - Activation Fee: " + getFee() + " - Strength: " + getStrength() + " - Cloaking Device: " + isCloaking() + ">";
     }
 }

@@ -8,7 +8,7 @@ package cwk4;
  * @version 23/03/2023
  */
 public class Battle {
-    private final String battleNumber;
+    private final int battleNumber;
     private final BattleType battleType;
     private final String enemy;
     private final int enemyStrength;
@@ -27,7 +27,7 @@ public class Battle {
      * @param gain     The gains that the admiral can take from winning
      *                 this battle.
      */
-    public Battle(String number, BattleType type, String enmy, int strength, int loss, int gain) {
+    public Battle(int number, BattleType type, String enmy, int strength, int loss, int gain) {
         battleNumber = number;
         battleType = type;
         enemy = enmy;
@@ -41,7 +41,7 @@ public class Battle {
      *
      * @return The battle's number.
      */
-    public String getBattleNumber() {
+    public int getBattleNumber() {
         return battleNumber;
     }
 
