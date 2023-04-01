@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class GameGUI {
     private final WIN game = new SpaceWars("Horatio");
-    private final JFrame frame = new JFrame("Game GUI");
+    private  JFrame frame = new JFrame("Game GUI");
     private final JTextArea listing = new JTextArea();
     private final JLabel codeLabel = new JLabel();
     private final JButton fightBtn = new JButton("Fight");
@@ -21,6 +21,8 @@ public class GameGUI {
      * Constructs a gameGUI object.
      */
     public GameGUI() {
+        frame.setPreferredSize(new Dimension(800, 600)); // set the preferred size of the frame
+        frame.setLocation(500, 200);
         makeFrame();
         makeMenuBar(frame);
     }
@@ -58,22 +60,32 @@ public class GameGUI {
      * Create the Swing frame and its content.
      */
     private void makeFrame() {
-        // Set up the frame's layout
-        frame.setLayout(new BorderLayout());
-        frame.add(listing, BorderLayout.CENTER);
-        listing.setVisible(false);
+        // Set up the main components
+        JPanel listingPanel = new JPanel();
+        JButton fightButton = new JButton("Fight");
+        JPanel eastPanel = new JPanel();
 
-        // Add the east panel to the frame and add the fight button
+        listingPanel.setLayout(null); // set the layout to null
+        listingPanel.setBackground(Color.WHITE); // set the background color
+        listingPanel.setVisible(false);
         frame.add(eastPanel, BorderLayout.EAST);
-        eastPanel.setLayout(new GridLayout(4, 1));
-        eastPanel.add(fightBtn);
-        fightBtn.addActionListener(e -> {
+
+        // Set up the east panel
+        eastPanel.setLayout(new GridLayout(4, 1, 0, 10)); // add some vertical spacing
+        eastPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // add some padding
+        eastPanel.add(fightButton);
+
+        // Set up the fight button
+        fightButton.addActionListener(e -> {
             int battleNumber = Integer.parseInt(JOptionPane.showInputDialog("Fight number ?: "));
             JOptionPane.showMessageDialog(frame, fighting(game.doBattle(battleNumber)));
         });
-        fightBtn.setVisible(true);
+        fightButton.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
+        fightButton.setForeground(Color.WHITE); // set the text color to white
+        fightButton.setBackground(Color.BLUE);
 
         // Arrange the components on the frame and show the GUI
+
         frame.pack();
         frame.setVisible(true);
     }
