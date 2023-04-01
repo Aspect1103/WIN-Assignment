@@ -99,7 +99,7 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW1Displayed() {
-        String[] forceIW1 = {"IW1", "Twisters"};
+        String[] forceIW1 = {"IW1", "Twister"};
         assertTrue(containsText(swim.getForcesInDock(), forceIW1));
     }
 
@@ -126,7 +126,7 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW4Displayed() {
-        String[] forceIW4 = {"IW4", "Wingers"};
+        String[] forceIW4 = {"IW4", "Winger"};
         assertTrue(containsText(swim.getForcesInDock(), forceIW4));
     }
 
@@ -171,7 +171,7 @@ public class DisplayBattlesForcesTest {
      */
     @Test
     public void forceFleetIW10Displayed() {
-        String[] forceIW10 = {"IW10", "Flyers"};
+        String[] forceIW10 = {"IW10", "Flyer"};
         assertTrue(containsText(swim.getForcesInDock(), forceIW10));
     }
 }
