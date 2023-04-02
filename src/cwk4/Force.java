@@ -1,4 +1,5 @@
 package cwk4;
+import java.io.Serializable;
 
 /**
  * Represents a force in the United Forces Fleet (UFF) which can partake
@@ -7,7 +8,7 @@ package cwk4;
  * @author Klevi, Jack, Luke, Abdulla
  * @version 23/03/2023
  */
-abstract public class Force {
+abstract public class Force implements Serializable {
     private final String reference;
     private final String name;
     private final int fee;
