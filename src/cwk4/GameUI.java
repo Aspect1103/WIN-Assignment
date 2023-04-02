@@ -10,25 +10,24 @@ import java.util.Scanner;
  */
 public class GameUI {
     private final Scanner scanner = new Scanner(System.in);
-    private final Scanner myIn = new Scanner(System.in);
+
     /**
      * Runs the command-line interface.
      *
      * @param args A string array of CLI arguments.
      */
     public static void main(String[] args) {
-        GameUI myGame = new GameUI();
-        myGame.playGame();
+        new GameUI().playGame();
     }
 
     /**
      * Play the game.
      */
     private void playGame() {
+        System.out.println("Enter admiral's name: ");
+        WIN gp = new SpaceWars(scanner.nextLine());
+
         int choice = 100;
-        System.out.println("Enter admiral's name@:");
-        String s = scanner.nextLine();
-        WIN gp = new SpaceWars(s);
         while (choice != 0) {
             choice = getMenuItem();
             if (choice == 1) {  // All forces
@@ -36,30 +35,29 @@ public class GameUI {
             } else if (choice == 2) { // List all battles
                 System.out.println(gp.getAllBattles());
             } else if (choice == 3) {  // get Force
-                System.out.println("Enter force reference");
-                String ref = myIn.nextLine();
-                System.out.println(gp.getForceDetails(ref));
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                System.out.println(gp.getForceDetails(scanner.nextLine()));
             } else if (choice == 4) {  // activate Force
-                System.out.println("Enter force reference");
-                String ref = myIn.nextLine();
-                System.out.println(gp.activateForce(ref));
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                System.out.println(gp.activateForce(scanner.nextLine()));
             } else if (choice == 5) { //  List ASFleet
                 System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
-                System.out.println("Enter battle Number");
-                int battlenum = myIn.nextInt();
-                System.out.println(gp.doBattle(battlenum));
+                System.out.println("Enter battle number: ");
+                scanner.nextLine();
+                System.out.println(gp.doBattle(scanner.nextInt()));
             } else if (choice == 7) {  // recall force
-                gp.recallForce(s);
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                gp.recallForce(scanner.nextLine());
             } else if (choice == 8) {  // view game state
                 System.out.println(gp);
             } else if (choice == 9) {  // Task 3.5 only
-                System.out.println("Write to file");
                 gp.saveGame("battles.txt");
             } else if (choice == 10) {  // Task 3.5 only
-                System.out.println("Restore from file");
-                gp = gp.restoreGame("olenka.txt");
-                System.out.println(gp.toString());
+                System.out.println(gp.restoreGame("olenka.txt"));
             }
         }
         System.out.println("Thank-you");
@@ -69,7 +67,7 @@ public class GameUI {
      * Display the menu with number of choices.
      */
     private int getMenuItem() {
-        int choice = 100;
+        // Display the main menu
         System.out.println("Main Menu");
         System.out.println("0. Quit");
         System.out.println("1. List all forces");
@@ -83,8 +81,10 @@ public class GameUI {
         System.out.println("9. Save this game");
         System.out.println("10. Restore a game");
 
+        // Get the user's choice
+        int choice = -1;
         while (choice < 0 || choice > 10) {
-            System.out.println("Enter the number of your choice");
+            System.out.println("Enter the number of your choice: ");
             choice = scanner.nextInt();
         }
         return choice;
