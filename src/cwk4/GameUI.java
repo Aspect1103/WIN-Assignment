@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class GameUI {
     private final Scanner scanner = new Scanner(System.in);
-
+    private final Scanner myIn = new Scanner(System.in);
     /**
      * Runs the command-line interface.
      *
@@ -25,11 +25,10 @@ public class GameUI {
      * Play the game.
      */
     private void playGame() {
-        int choice;
+        int choice = 100;
         System.out.println("Enter admiral's name@:");
         String s = scanner.nextLine();
         WIN gp = new SpaceWars(s);
-        choice = 100;
         while (choice != 0) {
             choice = getMenuItem();
             if (choice == 1) {  // All forces
@@ -37,18 +36,18 @@ public class GameUI {
             } else if (choice == 2) { // List all battles
                 System.out.println(gp.getAllBattles());
             } else if (choice == 3) {  // get Force
-                System.out.println("Enter Force reference");
-                String ref = (s).trim();
+                System.out.println("Enter force reference");
+                String ref = myIn.nextLine();
                 System.out.println(gp.getForceDetails(ref));
             } else if (choice == 4) {  // activate Force
-                scanner.nextLine();
-                String ref = (s).trim();
+                System.out.println("Enter force reference");
+                String ref = myIn.nextLine();
                 System.out.println(gp.activateForce(ref));
             } else if (choice == 5) { //  List ASFleet
                 System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
-                System.out.println("Enter Battle Number");
-                int battlenum = scanner.nextInt();
+                System.out.println("Enter battle Number");
+                int battlenum = myIn.nextInt();
                 System.out.println(gp.doBattle(battlenum));
             } else if (choice == 7) {  // recall force
                 gp.recallForce(s);
@@ -66,6 +65,9 @@ public class GameUI {
         System.out.println("Thank-you");
     }
 
+    /**
+     * Display the menu with number of choices.
+     */
     private int getMenuItem() {
         int choice = 100;
         System.out.println("Main Menu");
@@ -83,7 +85,7 @@ public class GameUI {
 
         while (choice < 0 || choice > 10) {
             System.out.println("Enter the number of your choice");
-            choice = myIn.nextInt();
+            choice = scanner.nextInt();
         }
         return choice;
     }
