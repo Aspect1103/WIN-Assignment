@@ -65,7 +65,7 @@ public class GameGUI {
         eastPanel.add(Box.createVerticalStrut(10));
         eastPanel.add(clear);
 
-        // Set up the Clear button
+        // Set up the ViewState button
         ViewState.addActionListener(e -> {
             listing.setVisible(true);
             listing.setText(game.toString());
