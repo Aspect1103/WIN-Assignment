@@ -15,8 +15,13 @@ public class GameGUI {
     private final JTextArea listing = new JTextArea();
     private final JPanel listingPanel = new JPanel();
     private final JButton fightButton = new JButton("Fight");
-    private final JButton listASFButton = new JButton("List ASF");
-    private final JButton activateForce = new JButton("Activate Force");
+    private final JButton ViewState = new JButton("View State");
+    private final JButton clear = new JButton("Clear");
+    private final JMenuItem listASF = new JMenuItem("List ASF");
+    private final JMenuItem activateForce = new JMenuItem("Activate Force");
+    private final JMenuItem recallForce = new JMenuItem("Recall Force");
+    private final JMenuItem listForcesItem = new JMenuItem("List All Forces ");
+    private final JMenuItem listBattles = new JMenuItem("List All Battles ");
     private final JPanel eastPanel = new JPanel();
 
     /**
@@ -43,33 +48,39 @@ public class GameGUI {
      */
     private void makeFrame() {
         listingPanel.setLayout(new BoxLayout(listingPanel, BoxLayout.Y_AXIS));
-        listingPanel.setBackground(Color.WHITE); // set the background color
+        listingPanel.setBackground(Color.WHITE);
         listingPanel.setVisible(true);
-        listingPanel.add(Box.createVerticalStrut(10)); // Add space of 10 pixels between the buttons
-        listingPanel.add(listASFButton);
-        listingPanel.add(Box.createVerticalStrut(10)); // Add space of 10 pixels between the buttons
-        listingPanel.add(activateForce);
+        listingPanel.add(listing);
 
+        // Arrange the components on the frame
         frame.add(eastPanel, BorderLayout.EAST);
         frame.add(listingPanel, BorderLayout.WEST);
 
-        listASFButton.addActionListener(e -> JOptionPane.showMessageDialog(frame, game.getASFleet()));
-        listASFButton.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
-        listASFButton.setForeground(Color.WHITE); // set the text color to white
-        listASFButton.setBackground(Color.BLUE);
-
-        activateForce.addActionListener(e -> {
-            String forceNum = JOptionPane.showInputDialog("Force reference ? ");
-            JOptionPane.showMessageDialog(frame, activatingForce(game.activateForce(forceNum)));
-        });
-        activateForce.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
-        activateForce.setForeground(Color.WHITE); // set the text color to white
-        activateForce.setBackground(Color.BLUE);
-
         // Set up the east panel
-        eastPanel.setLayout(new GridLayout(4, 1, 0, 10)); // add some vertical spacing
-        eastPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // add some padding
+        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
+        eastPanel.setBackground(Color.WHITE);
         eastPanel.add(fightButton);
+        eastPanel.add(Box.createVerticalStrut(10));
+        eastPanel.add(ViewState);
+        eastPanel.add(Box.createVerticalStrut(10));
+        eastPanel.add(clear);
+
+        // Set up the Clear button
+        ViewState.addActionListener(e -> {
+            listing.setVisible(true);
+            listing.setText(game.toString());
+        });
+        ViewState.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
+        ViewState.setForeground(Color.WHITE); // set the text color to white
+        ViewState.setBackground(Color.BLUE);
+
+        // Set up the Clear button
+        clear.addActionListener(e -> {
+            listing.setText("");
+        });
+        clear.setFont(new Font("Arial", Font.BOLD, 16)); // use a larger and bold font
+        clear.setForeground(Color.WHITE); // set the text color to white
+        clear.setBackground(Color.BLUE);
 
         // Set up the fight button
         fightButton.addActionListener(e -> {
@@ -81,7 +92,6 @@ public class GameGUI {
         fightButton.setBackground(Color.BLUE);
 
         // Arrange the components on the frame and show the GUI
-
         frame.pack();
         frame.setVisible(true);
     }
@@ -90,20 +100,63 @@ public class GameGUI {
      * Create the main frame's menu bar.
      */
     private void makeMenuBar() {
+
         // Create a menubar
         JMenuBar menubar = new JMenuBar();
+        menubar.setLayout(new BoxLayout(menubar, BoxLayout.X_AXIS));
+        menubar.setVisible(true);
+
+        // Arrange the components on the frame
         frame.setJMenuBar(menubar);
 
         // Create the forces menu
         JMenu forcesMenu = new JMenu("Forces");
-        menubar.add(forcesMenu);
 
-        // Add a list of forces menu item to the forces menu
-        JMenuItem listForcesItem = new JMenuItem("List All Forces ");
+        // Create the battles menu
+        JMenu battlesMenu = new JMenu("Battles");
+
+        // Arrange the components on the menubar
+        menubar.add(forcesMenu);
+        menubar.add(Box.createHorizontalStrut(100)); // Add space of 10 pixels between the buttons
+        menubar.add(battlesMenu);
+
+        //Adding menu items for forces and battles
+        recallForce.addActionListener(e -> {
+            String forceNum = JOptionPane.showInputDialog("Force reference ? ");
+            game.recallForce(forceNum);
+            JOptionPane.showMessageDialog(frame, "Force " + forceNum + " recalled.");
+            listing.setVisible(true);
+        });
+
         listForcesItem.addActionListener(e -> {
             listing.setVisible(true);
             listing.setText(game.getAllForces());
         });
+
+        activateForce.addActionListener(e -> {
+            String forceNum = JOptionPane.showInputDialog("Force reference ? ");
+            JOptionPane.showMessageDialog(frame, activatingForce(game.activateForce(forceNum)));
+            listing.setVisible(true);
+        });
+
+        listASF.addActionListener(e -> {
+            listing.setVisible(true);
+            listing.setText(game.getASFleet());
+        });
+
+        listBattles.addActionListener(e -> {
+            listing.setVisible(true);
+            listing.setText(game.getAllBattles());
+        });
+
+        // Arrange the components on the forcesMenu
+        forcesMenu.add(listForcesItem);
+        forcesMenu.add(recallForce);
+        forcesMenu.add(activateForce);
+        forcesMenu.add(listASF);
+
+        // Arrange the components on the battlesMenu
+        battlesMenu.add(listBattles);
     }
 
     /**
