@@ -15,17 +15,17 @@ public class GameGUI {
     private final JPanel eastPanel = new JPanel();
     private final JPanel outputPanel = new JPanel();
     private final JMenuBar menubar = new JMenuBar();
+    private final JTextArea outputText = new JTextArea();
     private final JMenu forcesMenu = new JMenu("Forces");
     private final JMenu battlesMenu = new JMenu("Battles");
-    private final JTextArea outputText = new JTextArea();
     private final JButton clearButton = new JButton("Clear");
     private final JButton fightButton = new JButton("Fight");
     private final JButton viewStateButton = new JButton("View State");
     private final JMenuItem listASFItem = new JMenuItem("List ASF");
     private final JMenuItem recallForceItem = new JMenuItem("Recall Force");
-    private final JMenuItem listBattlesItem = new JMenuItem("List All Battles ");
-    private final JMenuItem activateForceItem = new JMenuItem("Activate Force");
     private final JMenuItem listForcesItem = new JMenuItem("List All Forces ");
+    private final JMenuItem activateForceItem = new JMenuItem("Activate Force");
+    private final JMenuItem listBattlesItem = new JMenuItem("List All Battles ");
 
     /**
      * Constructs a game GUI object.
