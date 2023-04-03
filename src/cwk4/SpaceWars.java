@@ -2,7 +2,6 @@ package cwk4;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 
@@ -15,8 +14,8 @@ import java.util.Scanner;
  */
 public class SpaceWars implements WIN {
     private final String name;
-    private final HashMap<String, Force> forces = new HashMap<String, Force>();
-    private final HashMap<Integer, Battle> battles = new HashMap<Integer, Battle>();
+    private final HashMap<String, Force> forces = new HashMap<>();
+    private final HashMap<Integer, Battle> battles = new HashMap<>();
     private int warChest = 1000;
 
     /**
@@ -62,7 +61,7 @@ public class SpaceWars implements WIN {
      * @return Whether the admiral is defeated or not.
      */
     public boolean isDefeated() {
-        return warChest <= 0 && getASFleet().equals("");
+        return warChest <= 0 && !getASFleet().contains("Force");
     }
 
     /**
@@ -81,11 +80,11 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the system.
      */
     public String getAllForces() {
-        String s = "";
+        String s = "********************\n";
         for (Force value : forces.values()) {
             s += value + "\n";
         }
-        return s;
+        return s + "********************\n";
     }
 
     /**
@@ -105,13 +104,13 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the UFF dock.
      **/
     public String getForcesInDock() {
-        String s = "";
+        String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isDocked()) {
                 s += value + "\n";
             }
         }
-        return s;
+        return s + "********************\n";
     }
 
     /**
@@ -120,13 +119,13 @@ public class SpaceWars implements WIN {
      * @return A list of all destroyed forces in the system.
      */
     public String getDestroyedForces() {
-        String s = "";
+        String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isDestroyed()) {
                 s += value + "\n";
             }
         }
-        return s;
+        return s + "********************\n";
     }
 
     /**
@@ -185,13 +184,13 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the ASF.
      **/
     public String getASFleet() {
-        String s = "";
+        String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isActive()) {
                 s += value + "\n";
             }
         }
-        return s;
+        return s + "********************\n";
     }
 
     /**
@@ -237,11 +236,11 @@ public class SpaceWars implements WIN {
      * @return A list of all battles in the system.
      **/
     public String getAllBattles() {
-        String s = "";
+        String s = "********************\n";
         for (Battle value : battles.values()) {
             s += value + "\n";
         }
-        return s;
+        return s + "********************\n";
     }
 
     /**
