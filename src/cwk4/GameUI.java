@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Provides a command-line user interface for the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 01/04/2023
+ * @version 03/04/2023
  */
 public class GameUI {
     private final Scanner scanner = new Scanner(System.in);
@@ -22,58 +22,60 @@ public class GameUI {
     }
 
     /**
-     * Starts the game by prompting the user to enter a name for the admiral followed by a menu display.
-     * Depending on user's choice, the methods are  tasks accordingly e.g. activating force, recalling forces etc.
-     *
+     * Plays the game through a text-based interface.
      */
     private void playGame() {
+        // Create a game
+        System.out.println("Enter admiral's name:");
+        WIN game = new SpaceWars(scanner.nextLine());
+
+        // Accept user input and play game
         int choice = 100;
-        System.out.println("Enter admiral's name@:");
-        String admiralName = scanner.nextLine();
-        WIN gp = new SpaceWars(admiralName);
         while (choice != 0) {
             choice = getMenuItem();
-            if (choice == 1) {  // All forces
-                System.out.println(gp.getAllForces());
-            } else if (choice == 2) { // List all battles
-                System.out.println(gp.getAllBattles());
-            } else if (choice == 3) {  // get Force
-                System.out.println("Enter force reference");
-                String ref = scanner.nextLine();
-                System.out.println(gp.getForceDetails(ref));
-            } else if (choice == 4) {  // activate Force
-                System.out.println("Enter force reference");
-                String ref = scanner.nextLine();
-                System.out.println(activateResult(gp.activateForce(ref)));
-            } else if (choice == 5) { //  List ASFleet
-                System.out.println(gp.getASFleet());
-            } else if (choice == 6) {  // engage in a battle
-                System.out.println("Enter battle Number");
-                int battleNum = scanner.nextInt();
-                System.out.println(battleResult(gp.doBattle(battleNum)));
-            } else if (choice == 7) {  // recall force
-                System.out.println("Enter force reference");
-                String ref = scanner.nextLine();
-                gp.recallForce(ref);
-                if (gp.isInUFFDock(ref)) System.out.println("Force recalled to dock successfully");
-                else System.out.println("Something went wrong recalling force successfully");
-            } else if (choice == 8) {  // view game state
-                System.out.println(gp);
-            } else if (choice == 9) {  // Task 3.5 only
-                // prompt user to enter filename to save as
-                System.out.println("Enter filename to save as");
-                String filename = scanner.nextLine();
-                gp.saveGame(filename); // this does the saving
-                System.out.println(filename + " saved successfully");
-            } else if (choice == 10) {  // Task 3.5 only
-                System.out.println("Enter filename to load");
-                String filename = scanner.nextLine();
-                gp = gp.restoreGame(filename);
-                System.out.println(filename + " loaded successfully");
-                System.out.println(gp.toString());
+            if (choice == 1) {
+                // Display all forces
+                System.out.println(game.getAllForces());
+            } else if (choice == 2) {
+                // Display all battles
+                System.out.println(game.getAllBattles());
+            } else if (choice == 3) {
+                // Display a force
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                System.out.println(game.getForceDetails(scanner.nextLine()));
+            } else if (choice == 4) {
+                // Activate a force
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                System.out.println(activateResult(game.activateForce(scanner.nextLine())));
+            } else if (choice == 5) {
+                // Display ASF
+                System.out.println(game.getASFleet());
+            } else if (choice == 6) {
+                // Display the result of a battle
+                System.out.println("Enter battle number: ");
+                System.out.println(battleResult(game.doBattle(scanner.nextInt())));
+            } else if (choice == 7) {
+                // Recall a force
+                System.out.println("Enter force reference: ");
+                scanner.nextLine();
+                game.recallForce(scanner.nextLine());
+            } else if (choice == 8) {
+                // Display the game state
+                System.out.println(game);
+            } else if (choice == 9) {
+                // Save the game
+                System.out.println("Enter filename to save as: ");
+                scanner.nextLine();
+                game.saveGame(scanner.nextLine());
+            } else if (choice == 10) {
+                // Load the game
+                System.out.println("Enter filename to load: ");
+                scanner.nextLine();
+                game = game.restoreGame(scanner.nextLine());
             }
         }
-        System.out.println("Thank-you");
     }
 
     /**
