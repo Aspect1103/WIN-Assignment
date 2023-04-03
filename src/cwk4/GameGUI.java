@@ -40,6 +40,15 @@ public class GameGUI {
     }
 
     /**
+     * Runs the GUI.
+     *
+     * @param args A string array of CLI arguments.
+     */
+    public static void main(String[] args) {
+        new GameGUI();
+    }
+
+    /**
      * Create the Swing frame and its content.
      */
     private void makeFrame() {
@@ -52,10 +61,13 @@ public class GameGUI {
         // Set up the east panel
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
         eastPanel.setBackground(Color.WHITE);
+        fightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         eastPanel.add(fightButton);
         eastPanel.add(Box.createVerticalStrut(10));
+        viewStateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         eastPanel.add(viewStateButton);
         eastPanel.add(Box.createVerticalStrut(10));
+        clearButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         eastPanel.add(clearButton);
 
         // Set up the view button
@@ -166,14 +178,5 @@ public class GameGUI {
             default:
                 return "No such force";
         }
-    }
-
-    /**
-     * Runs the GUI.
-     *
-     * @param args A string array of CLI arguments.
-     */
-    public static void main(String[] args) {
-        new GameGUI();
     }
 }

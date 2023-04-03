@@ -17,7 +17,7 @@ public enum ForceState implements Serializable {
      *
      * @param st The type of force state.
      */
-    private ForceState(String st) {
+    ForceState(String st) {
         state = st;
     }
 
