@@ -1,5 +1,7 @@
 package cwk4;
+
 import java.io.Serializable;
+
 /**
  * Represents a battle between the Active Star Fleet (ASF) and the
  * enemy.

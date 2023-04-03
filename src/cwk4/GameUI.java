@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class GameUI {
     private final Scanner scanner = new Scanner(System.in);
-    private final Scanner myIn = new Scanner(System.in);
+
     /**
      * Runs the command-line interface.
      *
@@ -22,8 +22,7 @@ public class GameUI {
     }
 
     /**
-     * This the main method which triggers the game, prompting the user to enter a name for the admiral followed by a menu display.
-     * Depending on user's choice, the certain method is called accordingly e.g. activating force, recalling forces etc.
+     * Plays the game through a text-based interface.
      */
     private void playGame() {
         int choice = 100;
@@ -43,21 +42,19 @@ public class GameUI {
             } else if (choice == 4) {  // activate Force
                 System.out.println("Enter force reference");
                 String ref = myIn.nextLine();
-                System.out.println(activation(gp.activateForce(ref)));
+                System.out.println(activateResult(gp.activateForce(ref)));
             } else if (choice == 5) { //  List ASFleet
                 System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
                 System.out.println("Enter battle Number");
                 int battleNum = myIn.nextInt();
-                System.out.println(battleResultMessage(gp.doBattle(battleNum)));
+                System.out.println(battleResult(gp.doBattle(battleNum)));
             } else if (choice == 7) {  // recall force
                 System.out.println("Enter force reference");
                 String ref = myIn.nextLine();
                 gp.recallForce(ref);
-                if (gp.isInUFFDock(ref))
-                    System.out.println("Force recalled to dock successfully");
-                else
-                    System.out.println("Something went wrong recalling force successfully");
+                if (gp.isInUFFDock(ref)) System.out.println("Force recalled to dock successfully");
+                else System.out.println("Something went wrong recalling force successfully");
             } else if (choice == 8) {  // view game state
                 System.out.println(gp);
             } else if (choice == 9) {  // Task 3.5 only
@@ -81,7 +78,7 @@ public class GameUI {
      * Display the menu with number of choices.
      */
     private int getMenuItem() {
-        int choice = 100;
+        // Display the main menu
         System.out.println("Main Menu");
         System.out.println("0. Quit");
         System.out.println("1. List all forces");
@@ -95,42 +92,52 @@ public class GameUI {
         System.out.println("9. Save this game");
         System.out.println("10. Restore a game");
 
+        // Get the user's choice
+        int choice = -1;
         while (choice < 0 || choice > 10) {
-            System.out.println("Enter the number of your choice");
+            System.out.println("Enter the number of your choice: ");
             choice = scanner.nextInt();
         }
         return choice;
     }
 
-    private String activation(int activateForceRef) {
-        switch (activateForceRef) {
+    /**
+     * Process the result of activating a force.
+     *
+     * @param code The result of activating a force.
+     * @return A string representation of the result of activating a force.
+     */
+    private String activateResult(int code) {
+        switch (code) {
             case 0:
-                return "force is activated";
+                return "Force is activated";
             case 1:
-                return "force is not in the UFFDock";
+                return "Force is not in the UFF dock or is destroyed";
             case 2:
-                return "not enough money";
-            case 3:
-                return "no such force";
+                return "Not enough money";
             default:
-                return "Error";
+                return "No such force";
         }
     }
 
-    private String battleResultMessage(int battleResultCode) {
-        switch (battleResultCode) {
+    /**
+     * Process the result of a battle.
+     *
+     * @param code The result of the battle.
+     * @return A string representation of the result of a battle.
+     */
+    private String battleResult(int code) {
+        switch (code) {
             case 0:
-                return "Battle won so the gains are added to the war chest.";
+                return "Battle won";
             case 1:
-                return "Battle lost as no suitable force is available so losses are deducted from the war chest";
+                return "Battle lost as no suitable force available";
             case 2:
-                return "Battle lost on battle strength so losses are deducted from the war chest and the force is destroyed";
+                return "Battle lost on battle strength so force is destroyed";
             case 3:
-                return "Battle lost and the admiral is completely defeated (war chest is empty and no forces to recall)";
-            case -1:
-                return "No such battle is found.";
+                return "Battle is lost and admiral is completely defeated";
             default:
-                return "Error";
+                return "No such battle";
         }
     }
 }
