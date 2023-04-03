@@ -7,7 +7,7 @@ import java.io.Serializable;
  * in battles.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 23/03/2023
+ * @version 03/04/2023
  */
 abstract public class Force implements Serializable {
     private final String reference;
@@ -108,6 +108,7 @@ abstract public class Force implements Serializable {
      * Set the force's state to docked.
      */
     public void setInDock() {
+        // If the force is in the ASF, move it to the UFF
         if (forceState == ForceState.ACTIVE) {
             forceState = ForceState.DOCKED;
         }
@@ -117,6 +118,7 @@ abstract public class Force implements Serializable {
      * Set the force's state to active.
      */
     public void setActive() {
+        // If the force is in the UFF, move it to the ASF
         if (forceState == ForceState.DOCKED) {
             forceState = ForceState.ACTIVE;
         }
@@ -126,6 +128,7 @@ abstract public class Force implements Serializable {
      * Set the force's state to destroyed.
      */
     public void setDestroyed() {
+        // If the force is in the ASF, destroy it
         if (forceState == ForceState.ACTIVE) {
             forceState = ForceState.DESTROYED;
         }

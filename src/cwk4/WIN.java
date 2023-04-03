@@ -7,14 +7,13 @@ import java.io.Serializable;
  * system as required for 5COM2007.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 23/03/2023
+ * @version 03/04/2023
  */
 public interface WIN extends Serializable {
     /**
      * Get a human-readable representation of the state of the
      * game including the name of the admiral, the state of the
-     * war chest, whether defeated or not, and the forces currently
-     * in the ASF.
+     * war chest, and whether defeated or not.
      *
      * @return A string representation of the state of the game.
      **/

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * Holds tests related to the displaying battles and forces.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 27/03/2023
+ * @version 01/04/2023
  */
 public class DisplayBattlesForcesTest {
     // Define the WIN interface variable to use for testing

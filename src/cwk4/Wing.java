@@ -5,7 +5,7 @@ package cwk4;
  * be sent on fights.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 24/03/2023
+ * @version 03/04/2023
  */
 public class Wing extends Force {
     private final int strikers;
@@ -39,6 +39,7 @@ public class Wing extends Force {
      * @return Whether the wing can fight in the battle or not.
      */
     public boolean canFight(BattleType battleType) {
+        // The wing can only fight in skirmishes and ambushes
         switch (battleType) {
             case SKIRMISH:
             case AMBUSH:

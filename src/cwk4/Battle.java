@@ -7,7 +7,7 @@ import java.io.Serializable;
  * enemy.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 23/03/2023
+ * @version 03/04/2023
  */
 public class Battle implements Serializable {
     private final int battleNumber;

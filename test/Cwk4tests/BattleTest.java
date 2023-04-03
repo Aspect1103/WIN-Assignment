@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Holds tests related to the doing battles.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 27/03/2023
+ * @version 03/04/2023
  */
 public class BattleTest {
     // Define the WIN interface variable to use for testing
@@ -23,6 +23,21 @@ public class BattleTest {
     @Before
     public void setUp() {
         game = new SpaceWars("Jean");
+    }
+
+    /**
+     * Determine if a string contains text from a string array.
+     *
+     * @param text The string to check.
+     * @param str  The string array to check if its elements exist in text.
+     * @return Whether the string contains text from a string array or not.
+     */
+    private boolean containsText(String text, String[] str) {
+        boolean result = true;
+        for (String temp : str) {
+            result = result && (text.toLowerCase()).contains(temp.toLowerCase());
+        }
+        return result;
     }
 
     /**
@@ -232,5 +247,17 @@ public class BattleTest {
         game.doBattle(5);
         game.doBattle(4);
         assertTrue(game.isDefeated());
+    }
+
+    // ******************** CUSTOM TESTS ********************
+    /**
+     * Test if a destroyed force is displayed.
+     */
+    @Test
+    public void listDestroyedForcesHasAForce() {
+        String[] target = {"IW1", "Twister", "200", "200", "Destroyed", "10"};
+        game.activateForce("IW1");
+        game.doBattle(2);
+        assertTrue(containsText(game.getDestroyedForces(), target));
     }
 }

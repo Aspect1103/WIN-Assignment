@@ -4,7 +4,7 @@ package cwk4;
  * This class holds the details of our team made up of first and last names and student ID numbers.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 21/03/2023
+ * @version 01/03/2023
  */
 public class Teamwork {
     private final String[] details = new String[13];

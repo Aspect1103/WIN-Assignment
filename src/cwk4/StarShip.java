@@ -5,7 +5,7 @@ package cwk4;
  * be sent on ambushes.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 24/03/2023
+ * @version 03/04/2023
  */
 public class StarShip extends Force {
     private final int laserCannons;
@@ -50,6 +50,7 @@ public class StarShip extends Force {
      * @return Whether the starship can fight in the battle or not.
      */
     public boolean canFight(BattleType battleType) {
+        // The starship can only fight in skirmishes and fights
         switch (battleType) {
             case SKIRMISH:
             case FIGHT:

@@ -6,7 +6,7 @@ package cwk4;
  * a cloaking device.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 24/03/2023
+ * @version 03/04/2023
  */
 public class WarBird extends Force {
     private final boolean cloaking;
@@ -40,6 +40,7 @@ public class WarBird extends Force {
      * @return Whether the force can fight in the battle or not.
      */
     public boolean canFight(BattleType battleType) {
+        // The warbird can only fight in fights and ambushes (if they have cloaking)
         switch (battleType) {
             case AMBUSH:
                 return isCloaking();

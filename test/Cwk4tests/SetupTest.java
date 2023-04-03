@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Holds tests related to the initialisation of the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 27/03/2023
+ * @version 03/04/2023
  */
 public class SetupTest {
     // Define the WIN interface variable to use for testing
@@ -189,5 +189,14 @@ public class SetupTest {
     @Test
     public void invalidForceInASF() {
         assertFalse(game.isInASFleet("XX3"));
+    }
+
+    /**
+     * Test if no forces are destroyed at setup.
+     */
+    @Test
+    public void destroyedForcesEmpty() {
+        String[] target = {"No forces"};
+        assertTrue(containsText(game.getDestroyedForces(), target));
     }
 }

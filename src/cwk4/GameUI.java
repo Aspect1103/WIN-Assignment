@@ -111,7 +111,7 @@ public class GameUI {
      * @param code The result of activating a force.
      * @return A string representation of the result of activating a force.
      */
-    private String activateResult(int code) {
+    public static String activateResult(int code) {
         switch (code) {
             case 0:
                 return "Force is activated";
@@ -130,7 +130,7 @@ public class GameUI {
      * @param code The result of the battle.
      * @return A string representation of the result of a battle.
      */
-    private String battleResult(int code) {
+    public static String battleResult(int code) {
         switch (code) {
             case 0:
                 return "Battle won";

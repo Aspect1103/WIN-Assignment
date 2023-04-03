@@ -10,7 +10,7 @@ import java.util.Scanner;
  * system as required for 5COM2007.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 23/03/2023
+ * @version 03/04/2023
  */
 public class SpaceWars implements WIN {
     private final String name;
@@ -44,13 +44,12 @@ public class SpaceWars implements WIN {
     /**
      * Get a human-readable representation of the state of the
      * game including the name of the admiral, the state of the
-     * war chest, whether defeated or not, and the forces currently
-     * in the ASF.
+     * war chest, and whether defeated or not
      *
      * @return A string representation of the state of the game.
      **/
     public String toString() {
-        return "<Admiral Name: " + name + " - Current War Chest: " + warChest + " - Defeated " + isDefeated() + " - Current ASF: " + getASFleet() + ">";
+        return "<Admiral Name: " + name + " - Current War Chest: " + warChest + " - Defeated " + isDefeated() + ">";
     }
 
     /**
@@ -80,9 +79,15 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the system.
      */
     public String getAllForces() {
+        // Get all forces in the UFF
         String s = "********************\n";
         for (Force value : forces.values()) {
             s += value + "\n";
+        }
+
+        // If no forces are retrieved, add "No forces" to the result
+        if (!s.contains("Force")) {
+            s += "No forces\n";
         }
         return s + "********************\n";
     }
@@ -94,6 +99,7 @@ public class SpaceWars implements WIN {
      * @return Whether the force is in the UFF dock or not.
      **/
     public boolean isInUFFDock(String ref) {
+        // Get the force from the hashmap and check if it's docked. If one is not found, return false
         Force force = forces.get(ref);
         return force != null && force.isDocked();
     }
@@ -104,11 +110,17 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the UFF dock.
      **/
     public String getForcesInDock() {
+        // Get all forces in dock
         String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isDocked()) {
                 s += value + "\n";
             }
+        }
+
+        // If no forces are retrieved, add "No forces" to the result
+        if (!s.contains("Force")) {
+            s += "No forces\n";
         }
         return s + "********************\n";
     }
@@ -119,11 +131,17 @@ public class SpaceWars implements WIN {
      * @return A list of all destroyed forces in the system.
      */
     public String getDestroyedForces() {
+        // Get all destroyed forces
         String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isDestroyed()) {
                 s += value + "\n";
             }
+        }
+
+        // If no forces are retrieved, add "No forces" to the result
+        if (!s.contains("Force")) {
+            s += "No forces\n";
         }
         return s + "********************\n";
     }
@@ -136,6 +154,7 @@ public class SpaceWars implements WIN {
      * @return The force's details from a given force reference.
      **/
     public String getForceDetails(String ref) {
+        // Get the force from the hashmap. If one is not found, return "No such force"
         Force force = forces.get(ref);
         return force != null ? force.toString() : "No such force";
     }
@@ -151,8 +170,10 @@ public class SpaceWars implements WIN {
      * bit coins, or -1 if the force doesn't exist.
      **/
     public int activateForce(String ref) {
+        // Get the force from the hashmap
         Force force = forces.get(ref);
 
+        // If the force doesn't exist, return -1. Otherwise, check if it can be activated
         if (force != null) {
             if (!force.isDocked()) {
                 return 1;
@@ -174,6 +195,7 @@ public class SpaceWars implements WIN {
      * @return Whether the given force reference exists in the ASF.
      **/
     public boolean isInASFleet(String ref) {
+        // Get the force from the hashmap and check if it's active. If one is not found, return false
         Force force = forces.get(ref);
         return force != null && force.isActive();
     }
@@ -184,11 +206,17 @@ public class SpaceWars implements WIN {
      * @return A list of all forces in the ASF.
      **/
     public String getASFleet() {
+        // Get all forces in the ASF
         String s = "********************\n";
         for (Force value : forces.values()) {
             if (value.isActive()) {
                 s += value + "\n";
             }
+        }
+
+        // If no forces are retrieved, add "No forces" to the result
+        if (!s.contains("Force")) {
+            s += "No forces\n";
         }
         return s + "********************\n";
     }
@@ -199,8 +227,10 @@ public class SpaceWars implements WIN {
      * @param ref The reference of the force.
      **/
     public void recallForce(String ref) {
+        // Get the force from the hashmap
         Force force = forces.get(ref);
 
+        // If the force doesn't exist, return null. Otherwise, check if it can be recalled
         if (force != null && force.isActive()) {
             force.setInDock();
             warChest += force.getFee() / 2;
@@ -214,6 +244,7 @@ public class SpaceWars implements WIN {
      * @return Whether the given number represents a battle or not.
      **/
     public boolean isBattle(int num) {
+        // Get the battle from the hashmap. If one is not found, return false
         Battle battle = battles.get(num);
         return battle != null;
     }
@@ -226,6 +257,7 @@ public class SpaceWars implements WIN {
      * @return The battle's details from a given battle number.
      **/
     public String getBattle(int num) {
+        // Get the battle from the hashmap. If one is not found, return "No such battle"
         Battle battle = battles.get(num);
         return battle != null ? battle.toString() : "No such battle";
     }
@@ -236,9 +268,15 @@ public class SpaceWars implements WIN {
      * @return A list of all battles in the system.
      **/
     public String getAllBattles() {
+        // Get all battles
         String s = "********************\n";
         for (Battle value : battles.values()) {
             s += value + "\n";
+        }
+
+        // If no battles are retrieved, add "No battles" to the result
+        if (!s.contains("Battle")) {
+            s += "No battles\n";
         }
         return s + "********************\n";
     }
@@ -261,8 +299,10 @@ public class SpaceWars implements WIN {
      * @return An integer showing the result of the battle.
      */
     public int doBattle(int battleNo) {
+        // Get the battle from the hashmap
         Battle battle = battles.get(battleNo);
 
+        // If the battle doesn't exist, return -1
         if (battle == null) {
             return -1;
         }
@@ -294,6 +334,7 @@ public class SpaceWars implements WIN {
      * Initialises the forces into the system.
      */
     private void setupForces() {
+        // Load all the forces into the system
         forces.put("IW1", new Wing("IW1", "Twister", 200, 10));
         forces.put("SS2", new StarShip("SS2", "Enterprise", 10, 20));
         forces.put("WB3", new WarBird("WB3", "Droop", 100, false));
@@ -309,6 +350,7 @@ public class SpaceWars implements WIN {
      * Initialises the battles into the system.
      */
     private void setupBattles() {
+        // Load all the battles into the system
         battles.put(1, new Battle(1, BattleType.FIGHT, "Borg", 200, 300, 100));
         battles.put(2, new Battle(2, BattleType.SKIRMISH, "Kardassians", 700, 200, 120));
         battles.put(3, new Battle(3, BattleType.AMBUSH, "Ferengi", 100, 400, 150));
@@ -325,6 +367,7 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file to store the game state.
      */
     public void saveGame(String fname) {
+        // Save the current game's state to fname. If an error occurs, print the stack trace
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fname))) {
             outputStream.writeObject(this);
         } catch (IOException e) {
@@ -340,6 +383,7 @@ public class SpaceWars implements WIN {
      * @return The initialised SpaceWars object.
      */
     public SpaceWars restoreGame(String fname) {
+        // Load the current game's state from fname and return it. If an error occurs, print the stack trace
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fname))) {
             return (SpaceWars) inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -354,10 +398,15 @@ public class SpaceWars implements WIN {
      * @param fname The name of the file storing the battles.
      */
     private void readBattles(String fname) {
+        // Open fname in a scanner object, so it can be iterated through. If an error occurs, print the stack trace
         try (Scanner scanner = new Scanner(new File(fname))) {
+            // While there's still more data, keep reading
             int battleNumber = 1;
             while (scanner.hasNextLine()) {
+                // Get the whole line of data into an array, so we can process it
                 String[] tokens = scanner.nextLine().split(",");
+
+                // Determine the battle type of the current line
                 BattleType battleType;
                 switch (tokens[0]) {
                     case "Skirmish":
@@ -373,11 +422,8 @@ public class SpaceWars implements WIN {
                         battleType = null;
                 }
 
-                String enemyName = tokens[1];
-                int strength = Integer.parseInt(tokens[2]);
-                int loss = Integer.parseInt(tokens[3]);
-                int gain = Integer.parseInt(tokens[4]);
-                battles.put(battleNumber, new Battle(battleNumber, battleType, enemyName, strength, loss, gain));
+                // Create a new battle from the current line
+                battles.put(battleNumber, new Battle(battleNumber, battleType, tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4])));
                 battleNumber++;
             }
         } catch (FileNotFoundException e) {

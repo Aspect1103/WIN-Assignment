@@ -7,7 +7,7 @@ import java.awt.*;
  * Provides a GUI interface for the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 03/04/2023
+ * @version 04/04/2023
  */
 public class GameGUI {
     private final WIN game = new SpaceWars("Horatio");
@@ -15,17 +15,15 @@ public class GameGUI {
     private final JPanel eastPanel = new JPanel();
     private final JPanel outputPanel = new JPanel();
     private final JMenuBar menubar = new JMenuBar();
-    private final JTextArea outputText = new JTextArea();
+    private final JTextArea listing = new JTextArea();
     private final JMenu forcesMenu = new JMenu("Forces");
     private final JMenu battlesMenu = new JMenu("Battles");
     private final JButton clearButton = new JButton("Clear");
-    private final JButton fightButton = new JButton("Fight");
     private final JButton viewStateButton = new JButton("View State");
     private final JMenuItem listASFItem = new JMenuItem("List ASF");
     private final JMenuItem recallForceItem = new JMenuItem("Recall Force");
-    private final JMenuItem listForcesItem = new JMenuItem("List All Forces ");
     private final JMenuItem activateForceItem = new JMenuItem("Activate Force");
-    private final JMenuItem listBattlesItem = new JMenuItem("List All Battles ");
+    private final JMenuItem listBattlesItem = new JMenuItem("List All Battles");
 
     /**
      * Constructs a game GUI object.
@@ -56,13 +54,11 @@ public class GameGUI {
         outputPanel.setLayout(new BoxLayout(outputPanel, BoxLayout.Y_AXIS));
         outputPanel.setBackground(Color.WHITE);
         outputPanel.setVisible(true);
-        outputPanel.add(outputText);
+        outputPanel.add(listing);
 
         // Set up the east panel
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
         eastPanel.setBackground(Color.WHITE);
-        fightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        eastPanel.add(fightButton);
         eastPanel.add(Box.createVerticalStrut(10));
         viewStateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         eastPanel.add(viewStateButton);
@@ -71,25 +67,16 @@ public class GameGUI {
         eastPanel.add(clearButton);
 
         // Set up the view button
-        viewStateButton.addActionListener(e -> outputText.setText(game.toString()));
+        viewStateButton.addActionListener(e -> listing.setText(game.toString()));
         viewStateButton.setFont(new Font("Arial", Font.BOLD, 16));
         viewStateButton.setForeground(Color.WHITE);
         viewStateButton.setBackground(Color.BLUE);
 
         // Set up the clear button
-        clearButton.addActionListener(e -> outputText.setText(""));
+        clearButton.addActionListener(e -> listing.setText(""));
         clearButton.setFont(new Font("Arial", Font.BOLD, 16));
         clearButton.setForeground(Color.WHITE);
         clearButton.setBackground(Color.BLUE);
-
-        // Set up the fight button
-        fightButton.addActionListener(e -> {
-            int battleNumber = Integer.parseInt(JOptionPane.showInputDialog("Battle number: "));
-            JOptionPane.showMessageDialog(frame, battleResult(game.doBattle(battleNumber)));
-        });
-        fightButton.setFont(new Font("Arial", Font.BOLD, 16));
-        fightButton.setForeground(Color.WHITE);
-        fightButton.setBackground(Color.BLUE);
 
         // Arrange the components on the frame and show the GUI
         frame.add(eastPanel, BorderLayout.EAST);
@@ -112,19 +99,21 @@ public class GameGUI {
         menubar.add(battlesMenu);
 
         // Add the menu items for forces and battles
-        recallForceItem.addActionListener(e -> game.recallForce(JOptionPane.showInputDialog("Force reference: ")));
+        recallForceItem.addActionListener(e -> {
+            String forceRef = JOptionPane.showInputDialog("Force reference: ");
+            game.recallForce(forceRef);
+            JOptionPane.showMessageDialog(frame, "Force" + forceRef + "recalled");
+        });
 
         // Add action listeners for each menu item
-        listForcesItem.addActionListener(e -> outputText.setText(game.getAllForces()));
         activateForceItem.addActionListener(e -> {
             String forceNum = JOptionPane.showInputDialog("Force reference: ");
             JOptionPane.showMessageDialog(frame, activateResult(game.activateForce(forceNum)));
         });
-        listASFItem.addActionListener(e -> outputText.setText(game.getASFleet()));
-        listBattlesItem.addActionListener(e -> outputText.setText(game.getAllBattles()));
+        listASFItem.addActionListener(e -> listing.setText(game.getASFleet()));
+        listBattlesItem.addActionListener(e -> listing.setText(game.getAllBattles()));
 
         // Arrange the components on the forcesMenu
-        forcesMenu.add(listForcesItem);
         forcesMenu.add(recallForceItem);
         forcesMenu.add(activateForceItem);
         forcesMenu.add(listASFItem);
@@ -142,7 +131,7 @@ public class GameGUI {
      * @param code The result of activating a force.
      * @return A string representation of the result of activating a force.
      */
-    private String activateResult(int code) {
+    public static String activateResult(int code) {
         switch (code) {
             case 0:
                 return "Force is activated";
@@ -152,27 +141,6 @@ public class GameGUI {
                 return "Not enough money";
             default:
                 return "No such force";
-        }
-    }
-
-    /**
-     * Process the result of a battle.
-     *
-     * @param code The result of the battle.
-     * @return A string representation of the result of a battle.
-     */
-    private String battleResult(int code) {
-        switch (code) {
-            case 0:
-                return "Battle won";
-            case 1:
-                return "Battle lost as no suitable force available";
-            case 2:
-                return "Battle lost on battle strength so force is destroyed";
-            case 3:
-                return "Battle is lost and admiral is completely defeated";
-            default:
-                return "No such battle";
         }
     }
 }
