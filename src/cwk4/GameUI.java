@@ -22,7 +22,9 @@ public class GameUI {
     }
 
     /**
-     * Plays the game through a text-based interface.
+     * Starts the game by prompting the user to enter a name for the admiral followed by a menu display.
+     * Depending on user's choice, the methods are  tasks accordingly e.g. activating force, recalling forces etc.
+     *
      */
     private void playGame() {
         int choice = 100;
@@ -37,21 +39,21 @@ public class GameUI {
                 System.out.println(gp.getAllBattles());
             } else if (choice == 3) {  // get Force
                 System.out.println("Enter force reference");
-                String ref = myIn.nextLine();
+                String ref = scanner.nextLine();
                 System.out.println(gp.getForceDetails(ref));
             } else if (choice == 4) {  // activate Force
                 System.out.println("Enter force reference");
-                String ref = myIn.nextLine();
+                String ref = scanner.nextLine();
                 System.out.println(activateResult(gp.activateForce(ref)));
             } else if (choice == 5) { //  List ASFleet
                 System.out.println(gp.getASFleet());
             } else if (choice == 6) {  // engage in a battle
                 System.out.println("Enter battle Number");
-                int battleNum = myIn.nextInt();
+                int battleNum = scanner.nextInt();
                 System.out.println(battleResult(gp.doBattle(battleNum)));
             } else if (choice == 7) {  // recall force
                 System.out.println("Enter force reference");
-                String ref = myIn.nextLine();
+                String ref = scanner.nextLine();
                 gp.recallForce(ref);
                 if (gp.isInUFFDock(ref)) System.out.println("Force recalled to dock successfully");
                 else System.out.println("Something went wrong recalling force successfully");
@@ -60,15 +62,15 @@ public class GameUI {
             } else if (choice == 9) {  // Task 3.5 only
                 // prompt user to enter filename to save as
                 System.out.println("Enter filename to save as");
-                String filename = myIn.nextLine();
+                String filename = scanner.nextLine();
                 gp.saveGame(filename); // this does the saving
                 System.out.println(filename + " saved successfully");
             } else if (choice == 10) {  // Task 3.5 only
                 System.out.println("Enter filename to load");
-                String filename = myIn.nextLine();
+                String filename = scanner.nextLine();
                 gp = gp.restoreGame(filename);
                 System.out.println(filename + " loaded successfully");
-                //System.out.println(gp.toString());
+                System.out.println(gp.toString());
             }
         }
         System.out.println("Thank-you");
