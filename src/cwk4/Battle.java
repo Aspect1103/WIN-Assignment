@@ -1,5 +1,7 @@
 package cwk4;
 
+import java.io.Serializable;
+
 /**
  * Represents a battle between the Active Star Fleet (ASF) and the
  * enemy.
@@ -7,7 +9,7 @@ package cwk4;
  * @author Klevi, Jack, Luke, Abdulla
  * @version 23/03/2023
  */
-public class Battle {
+public class Battle implements Serializable {
     private final int battleNumber;
     private final BattleType battleType;
     private final String enemy;

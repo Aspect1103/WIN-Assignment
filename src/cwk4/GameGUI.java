@@ -7,7 +7,7 @@ import java.awt.*;
  * Provides a GUI interface for the game.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 02/04/2023
+ * @version 03/04/2023
  */
 public class GameGUI {
     private final WIN game = new SpaceWars("Horatio");
@@ -85,7 +85,7 @@ public class GameGUI {
         // Set up the fight button
         fightButton.addActionListener(e -> {
             int battleNumber = Integer.parseInt(JOptionPane.showInputDialog("Battle number: "));
-            JOptionPane.showMessageDialog(frame, fighting(game.doBattle(battleNumber)));
+            JOptionPane.showMessageDialog(frame, battleResult(game.doBattle(battleNumber)));
         });
         fightButton.setFont(new Font("Arial", Font.BOLD, 16));
         fightButton.setForeground(Color.WHITE);
@@ -112,17 +112,13 @@ public class GameGUI {
         menubar.add(battlesMenu);
 
         // Add the menu items for forces and battles
-        recallForceItem.addActionListener(e -> {
-            String forceRef = JOptionPane.showInputDialog("Force reference: ");
-            game.recallForce(forceRef);
-            JOptionPane.showMessageDialog(frame, "Force " + forceRef + " recalled");
-        });
+        recallForceItem.addActionListener(e -> game.recallForce(JOptionPane.showInputDialog("Force reference: ")));
 
         // Add action listeners for each menu item
         listForcesItem.addActionListener(e -> outputText.setText(game.getAllForces()));
         activateForceItem.addActionListener(e -> {
             String forceNum = JOptionPane.showInputDialog("Force reference: ");
-            JOptionPane.showMessageDialog(frame, activatingForce(game.activateForce(forceNum)));
+            JOptionPane.showMessageDialog(frame, activateResult(game.activateForce(forceNum)));
         });
         listASFItem.addActionListener(e -> outputText.setText(game.getASFleet()));
         listBattlesItem.addActionListener(e -> outputText.setText(game.getAllBattles()));
@@ -141,12 +137,31 @@ public class GameGUI {
     }
 
     /**
+     * Process the result of activating a force.
+     *
+     * @param code The result of activating a force.
+     * @return A string representation of the result of activating a force.
+     */
+    private String activateResult(int code) {
+        switch (code) {
+            case 0:
+                return "Force is activated";
+            case 1:
+                return "Force is not in the UFF dock or is destroyed";
+            case 2:
+                return "Not enough money";
+            default:
+                return "No such force";
+        }
+    }
+
+    /**
      * Process the result of a battle.
      *
      * @param code The result of the battle.
      * @return A string representation of the result of a battle.
      */
-    private String fighting(int code) {
+    private String battleResult(int code) {
         switch (code) {
             case 0:
                 return "Battle won";
@@ -158,25 +173,6 @@ public class GameGUI {
                 return "Battle is lost and admiral is completely defeated";
             default:
                 return "No such battle";
-        }
-    }
-
-    /**
-     * Process the result of activating a force.
-     *
-     * @param code The result of activating a force.
-     * @return A string representation of the result of activating a force.
-     */
-    private String activatingForce(int code) {
-        switch (code) {
-            case 0:
-                return "Force is activated";
-            case 1:
-                return "Force is not in the UFF dock or is destroyed";
-            case 2:
-                return "Not enough money";
-            default:
-                return "No such force";
         }
     }
 }
