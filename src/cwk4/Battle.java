@@ -39,7 +39,7 @@ public class Battle implements Serializable {
     }
 
     /**
-     * Get the battle's number.
+     * Get the battle's number.TYPO
      *
      * @return The battle's number.
      */
