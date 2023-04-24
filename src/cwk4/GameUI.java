@@ -74,6 +74,10 @@ public class GameUI {
                 System.out.println("Enter filename to load: ");
                 scanner.nextLine();
                 game = game.restoreGame(scanner.nextLine());
+            } else if (choice == 11) {
+                // Determine if a number is a battle
+                int battle = scanner.nextInt();
+                System.out.println(battle + " is a battle: " + game.isBattle(battle));
             }
         }
     }
@@ -95,10 +99,11 @@ public class GameUI {
         System.out.println("8. View the state of the game");
         System.out.println("9. Save this game");
         System.out.println("10. Restore a game");
+        System.out.println("11. Test if battle");
 
         // Get the user's choice
         int choice = -1;
-        while (choice < 0 || choice > 10) {
+        while (choice < 0 || choice > 11) {
             System.out.println("Enter the number of your choice: ");
             choice = scanner.nextInt();
         }

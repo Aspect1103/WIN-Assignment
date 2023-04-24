@@ -10,7 +10,7 @@ import java.util.Scanner;
  * system as required for 5COM2007.
  *
  * @author Klevi, Jack, Luke, Abdulla
- * @version 03/04/2023
+ * @version 24/04/2023
  */
 public class SpaceWars implements WIN {
     private final String name;
@@ -39,6 +39,15 @@ public class SpaceWars implements WIN {
         name = admiral;
         setupForces();
         readBattles(filename);
+    }
+
+    /**
+     * Get the admiral's name.
+     *
+     * @return The admiral's name.
+     */
+    public String getAdmiral() {
+        return name;
     }
 
     /**
@@ -344,6 +353,8 @@ public class SpaceWars implements WIN {
         forces.put("SS7", new StarShip("SS7", "Explorer", 4, 5));
         forces.put("WB9", new WarBird("WB9", "Hover", 400, false));
         forces.put("IW10", new Wing("IW10", "Flyer", 200, 5));
+        forces.put("IW13", new Wing("IW13", "Name", 0, 6));
+        forces.put("M14", new Megrim("M14", "Grumbler", 600, "Fred"));
     }
 
     /**
@@ -359,6 +370,7 @@ public class SpaceWars implements WIN {
         battles.put(6, new Battle(6, BattleType.SKIRMISH, "Groaners", 150, 100, 100));
         battles.put(7, new Battle(7, BattleType.FIGHT, "Borg", 150, 500, 300));
         battles.put(8, new Battle(8, BattleType.AMBUSH, "Wailers", 300, 300, 300));
+        battles.put(9, new Battle(9, BattleType.SKIRMISH, "Spuds", 1, 100, 100));
     }
 
     /**

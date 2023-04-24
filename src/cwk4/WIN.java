@@ -11,6 +11,13 @@ import java.io.Serializable;
  */
 public interface WIN extends Serializable {
     /**
+     * Get the admiral's name.
+     *
+     * @return The admiral's name.
+     */
+    public String getAdmiral();
+
+    /**
      * Get a human-readable representation of the state of the
      * game including the name of the admiral, the state of the
      * war chest, and whether defeated or not.
